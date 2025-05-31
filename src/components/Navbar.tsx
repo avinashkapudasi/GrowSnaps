@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, BarChart2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,10 +27,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'News & Blogs', path: '/news' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Services', path: '#' },
+    { name: 'News & Blogs', path: '#' },
+    { name: 'Portfolio', path: '#' },
+    { name: 'Contact', path: '#' }
   ];
 
   return (

@@ -20,9 +20,9 @@ const Hero: React.FC<HeroProps> = ({
   subtitle,
   imageSrc = 'https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1600',
   primaryButtonText = 'Get in Touch',
-  primaryButtonLink = '/contact',
+  primaryButtonLink = '#',
   secondaryButtonText = 'Learn More',
-  secondaryButtonLink = '/services',
+  secondaryButtonLink = '#',
   overlay = true,
 }) => {
   return (

@@ -37,24 +37,24 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Services</Link></li>
-              <li><Link to="/news" className="text-gray-400 hover:text-white transition-colors">News & Blogs</Link></li>
-              <li><Link to="/portfolio" className="text-gray-400 hover:text-white transition-colors">Portfolio</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Services</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">News & Blogs</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Portfolio</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services
           <div>
             <h3 className="text-lg font-semibold mb-4">Our Services</h3>
             <ul className="space-y-2">
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Idea Validation</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Customer Discovery</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Go-to-Market Strategy</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Scale-Up Plan</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Digital Marketing</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Idea Validation</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Customer Discovery</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Go-to-Market Strategy</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Scale-Up Plan</Link></li>
+              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Digital Marketing</Link></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact */}
           <div>
