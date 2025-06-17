@@ -106,9 +106,7 @@ const PortfolioPage: React.FC = () => {
             <p className="text-gray-600 mb-4">
               These are just a few examples of our successful client engagements.
             </p>
-            <button className="btn-secondary">
-              Load More Projects
-            </button>
+            
           </div>
         </div>
       </section>

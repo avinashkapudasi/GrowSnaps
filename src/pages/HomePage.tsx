@@ -59,16 +59,7 @@ const HomePage: React.FC = () => {
               <p className="text-gray-600 mb-8 leading-relaxed">
                 Our expertise spans across customer discovery, hypothesis validation, product-market fit, go-to-market strategies, pricing optimization, digital marketing, and more. Whether you're launching a new venture or looking to scale efficiently, our tailored strategies help you navigate every stage of your business journey.
               </p>
-              <Link to="#">
-                <Button 
-                  variant="primary"
-                  size="md"
-                  icon={<ArrowRight size={18} />}
-                  iconPosition="right"
-                >
-                  Explore Our Services
-                </Button>
-              </Link>
+              
             </motion.div>
 
             <motion.div
@@ -110,7 +101,7 @@ const HomePage: React.FC = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <Link to="#">
+            <Link to="/services">
               <Button variant="outline">
                 View All Services
               </Button>
@@ -147,7 +138,7 @@ const HomePage: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <Link to="#">
+              <Link to="/contact">
                 <Button 
                   variant="outline" 
                   size="lg"

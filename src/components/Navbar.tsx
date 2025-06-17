@@ -1,6 +1,6 @@
 import  { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, BarChart2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
@@ -27,24 +27,22 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Services', path: '#' },
-    { name: 'News & Blogs', path: '#' },
-    { name: 'Portfolio', path: '#' },
-    { name: 'Contact', path: '#' }
+    { name: 'Services', path: '/services' },
+    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Contact', path: '/contact' }
   ];
 
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'
+        isScrolled ? 'bg-white shadow-md py-3' : 'bg-white py-5'
       }`}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2">
-            <BarChart2 className="h-8 w-8 text-primary-600" />
-            <span className="font-bold text-xl text-gray-900">GrowSnaps</span>
-          </Link>
+            <Link to="/" className="flex items-center space-x-2">
+            <img src="src/Grow Snaps_page-0001.jpg" alt="GrowSnaps Logo" className="h-12 w-22" />           
+            </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { BarChart2, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
@@ -10,8 +9,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <BarChart2 className="h-8 w-8 text-primary-400" />
-              <span className="font-bold text-xl">GrowSnaps</span>
+              <img src="src/growsnaps_bg_removed.png" alt="GrowSnaps Logo" className="h-20 w-auto" />
             </div>
             <p className="text-gray-400 mb-6">
               We transform ideas into scalable businesses with strategic insights and innovative solutions.
@@ -37,24 +35,13 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Services</Link></li>
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">News & Blogs</Link></li>
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Portfolio</Link></li>
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Services</Link></li>
+              <li><Link to="/portfolio" className="text-gray-400 hover:text-white transition-colors">Portfolio</Link></li>
+              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Services
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Our Services</h3>
-            <ul className="space-y-2">
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Idea Validation</Link></li>
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Customer Discovery</Link></li>
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Go-to-Market Strategy</Link></li>
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Scale-Up Plan</Link></li>
-              <li><Link to="#" className="text-gray-400 hover:text-white transition-colors">Digital Marketing</Link></li>
-            </ul>
-          </div> */}
+          
 
           {/* Contact */}
           <div>

@@ -10,8 +10,6 @@ interface HeroProps {
   imageSrc?: string;
   primaryButtonText?: string;
   primaryButtonLink?: string;
-  secondaryButtonText?: string;
-  secondaryButtonLink?: string;
   overlay?: boolean;
 }
 
@@ -20,9 +18,7 @@ const Hero: React.FC<HeroProps> = ({
   subtitle,
   imageSrc = 'https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1600',
   primaryButtonText = 'Get in Touch',
-  primaryButtonLink = '#',
-  secondaryButtonText = 'Learn More',
-  secondaryButtonLink = '#',
+  primaryButtonLink = '/contact',
   overlay = true,
 }) => {
   return (
@@ -71,15 +67,7 @@ const Hero: React.FC<HeroProps> = ({
               </Button>
             </Link>
             
-            <Link to={secondaryButtonLink}>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-white text-white hover:bg-white/10"
-              >
-                {secondaryButtonText}
-              </Button>
-            </Link>
+            
           </motion.div>
         </div>
       </div>

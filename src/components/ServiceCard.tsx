@@ -25,10 +25,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description, del
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
       <p className="text-gray-600 mb-4">{description}</p>
       
-      <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform duration-300">
+      {/* <div className="flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform duration-300">
         <span className="mr-1">Learn more</span>
         <ArrowRight size={16} />
-      </div>
+      </div> */}
     </motion.div>
   );
 };
