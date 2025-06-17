@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { BarChart2, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import logo from '../assets/growsnaps_bg_removed.png'; // Add this import at the top
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <img src="src/growsnaps_bg_removed.png" alt="GrowSnaps Logo" className="h-20 w-auto" />
+              <img src={logo} alt="GrowSnaps Logo" className="h-20 w-auto" />
             </div>
             <p className="text-gray-400 mb-6">
               We transform ideas into scalable businesses with strategic insights and innovative solutions.
@@ -40,8 +41,6 @@ const Footer = () => {
               <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
-
-          
 
           {/* Contact */}
           <div>

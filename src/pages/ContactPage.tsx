@@ -122,13 +122,8 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="h-96 bg-gray-200 relative">
-        {/* In a real implementation, you would integrate with a map provider like Google Maps */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <p className="text-gray-600 text-lg font-medium">Map will be displayed here</p>
-        </div>
-      </section>
+      
+     
     </>
   );
 };
