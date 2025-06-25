@@ -55,19 +55,39 @@ const Hero: React.FC<HeroProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            <Link to={primaryButtonLink}>
+          >            <Link to={primaryButtonLink}>
               <Button 
                 variant="primary" 
                 size="lg"
-                icon={<ArrowRight size={20} />}
+                icon={<ArrowRight size={20} className="text-[#333333]" />}
                 iconPosition="right"
+                className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
               >
                 {primaryButtonText}
               </Button>
             </Link>
-            
-            
+            <Link to="/services">
+              <Button 
+                variant="secondary" 
+                size="lg"
+                icon={<ArrowRight size={20} className="text-[#333333]" />}
+                iconPosition="right"
+                className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
+              >
+                Explore Our Services
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button 
+                variant="outline" 
+                size="lg"
+                icon={<ArrowRight size={20} className="text-[#333333]" />}
+                iconPosition="right"
+                className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
+              >
+                Partner With Us
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>

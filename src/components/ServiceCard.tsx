@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 
 interface ServiceCardProps {
   icon: React.ReactNode;
@@ -17,8 +16,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description, del
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
       viewport={{ once: true, margin: "-100px" }}
-    >
-      <div className="w-14 h-14 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center mb-5 group-hover:bg-primary-600 group-hover:text-white transition-all duration-300">
+    >      <div className="w-14 h-14 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center mb-5 group-hover:bg-[#F9C800] group-hover:text-[#333333] transition-all duration-300">
         {icon}
       </div>
       

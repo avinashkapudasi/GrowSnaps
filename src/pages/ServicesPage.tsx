@@ -120,40 +120,36 @@ const ServicesPage: React.FC = () => {
                 alignment="left"
               />
               
-              <div className="space-y-6">
-                <div>
+              <div className="space-y-6">                <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center">
-                    <span className="w-8 h-8 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mr-3">1</span>
+                    <span className="w-8 h-8 bg-[#F9C800]/20 text-[#F9C800] rounded-full flex items-center justify-center mr-3">1</span>
                     Comprehensive Analysis
                   </h3>
                   <p className="text-gray-600 pl-11">
                     We start with a thorough assessment of your business, market, and competition to identify opportunities and challenges.
                   </p>
                 </div>
-                
-                <div>
+                  <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center">
-                    <span className="w-8 h-8 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mr-3">2</span>
+                    <span className="w-8 h-8 bg-[#F9C800]/20 text-[#F9C800] rounded-full flex items-center justify-center mr-3">2</span>
                     Strategy Development
                   </h3>
                   <p className="text-gray-600 pl-11">
                     We create tailored strategies based on data-driven insights, industry expertise, and proven methodologies.
                   </p>
                 </div>
-                
-                <div>
+                  <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center">
-                    <span className="w-8 h-8 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mr-3">3</span>
+                    <span className="w-8 h-8 bg-[#F9C800]/20 text-[#F9C800] rounded-full flex items-center justify-center mr-3">3</span>
                     Implementation Support
                   </h3>
                   <p className="text-gray-600 pl-11">
                     We work alongside your team to ensure successful execution, providing guidance and expertise throughout the process.
                   </p>
                 </div>
-                
-                <div>
+                  <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center">
-                    <span className="w-8 h-8 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mr-3">4</span>
+                    <span className="w-8 h-8 bg-[#F9C800]/20 text-[#F9C800] rounded-full flex items-center justify-center mr-3">4</span>
                     Continuous Optimization
                   </h3>
                   <p className="text-gray-600 pl-11">
@@ -190,7 +186,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary-600 text-white">
+      <section className="py-16 bg-[#708090] text-white">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <motion.h2 
@@ -217,11 +213,10 @@ const ServicesPage: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <Link to="/contact">
-                <Button 
+              <Link to="/contact">                <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white text-white hover:bg-white hover:text-primary-600"
+                  className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333] border-none"
                 >
                   Contact Us Today
                 </Button>

@@ -46,7 +46,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({
               href={link}
               target="_blank"
               rel="noopener noreferrer" 
-              className="inline-flex items-center text-white bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+              className="inline-flex items-center text-[#333333] bg-[#F9C800] hover:bg-[#F9C800]/90 px-4 py-2 rounded-md text-sm font-medium transition-colors"
             >
               View Project
               <ExternalLink size={16} className="ml-1" />

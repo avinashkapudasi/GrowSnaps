@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Users, LineChart, Rocket, ArrowRight } from 'lucide-react';
+import { Lightbulb, Users, LineChart, Rocket,  } from 'lucide-react';
 
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
@@ -36,8 +36,8 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Hero 
-        title="Transform Ideas into Scalable Businesses"
-        subtitle="We empower startups and established businesses with strategic insights, innovative solutions, and data-driven execution to achieve sustainable growth and competitive advantage."
+        title="From Spark to Scale — We Grow Innovation at Every Stage."
+        subtitle="GrowSnaps Global Ventures partners with students, startups, and institutions to build powerful entrepreneurial ecosystems through hands-on training, innovation modules, and strategy consulting."
         imageSrc="https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1600"
       />
 
@@ -52,9 +52,11 @@ const HomePage: React.FC = () => {
               viewport={{ once: true, margin: "-100px" }}
             >
               <span className="text-primary-600 font-semibold">About GrowSnaps</span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">Your Partner in Business Growth</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">Your Partner in Strategy, Startup Success, and Innovation Culture.</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                At GrowSnaps Global Ventures, we believe in transforming innovative ideas into sustainable businesses. With our deep understanding of market trends and consumer behavior, we provide end-to-end guidance—from idea validation to scaling up—ensuring our clients achieve sustainable growth and competitive advantage.
+               GrowSnaps Global Ventures is a strategy and innovation consulting firm that empowers startups, enterprises, and educational institutions to unlock their full potential. We work across all stages of the entrepreneurial journey — from ideation to scale — delivering hands-on support in product strategy, go-to-market planning, branding, and innovation ecosystem building.
+               Our programs are designed to nurture student innovators, guide early-stage founders, and help businesses refine their strategy, build scalable products, and grow with clarity. Whether you're a campus looking to create future entrepreneurs or a brand ready to disrupt, GrowSnaps is your partner in turning bold ideas into real-world impact.
+
               </p>
               <p className="text-gray-600 mb-8 leading-relaxed">
                 Our expertise spans across customer discovery, hypothesis validation, product-market fit, go-to-market strategies, pricing optimization, digital marketing, and more. Whether you're launching a new venture or looking to scale efficiently, our tailored strategies help you navigate every stage of your business journey.
@@ -102,7 +104,10 @@ const HomePage: React.FC = () => {
 
           <div className="mt-12 text-center">
             <Link to="/services">
-              <Button variant="outline">
+              <Button 
+                variant="outline" 
+                className="bg-[#F9C800] text-[#333333] hover:bg-[#F9C800] hover:text-[#333333] border-[#F9C800]"
+              >
                 View All Services
               </Button>
             </Link>
@@ -142,7 +147,7 @@ const HomePage: React.FC = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white text-white hover:bg-white hover:text-primary-600"
+                  className="bg-[#F9C800] text-[#333333] hover:bg-[#F9C800] hover:text-[#333333] border-[#F9C800]"
                 >
                   Schedule a Consultation
                 </Button>

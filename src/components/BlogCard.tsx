@@ -38,8 +38,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
             src={imageSrc} 
             alt={title} 
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
-          />
-          <div className="absolute top-4 left-4 bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+          />          <div className="absolute top-4 left-4 bg-[#F9C800] text-[#333333] text-xs font-semibold px-3 py-1 rounded-full">
             {category}
           </div>
         </div>
@@ -67,7 +66,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         
         <Link 
           to={`/news/${slug}`}
-          className="text-primary-600 font-medium inline-flex items-center hover:underline"
+          className="text-[#333333] bg-[#F9C800] hover:bg-[#F9C800]/90 font-medium inline-flex items-center px-4 py-2 rounded-md transition-colors"
         >
           Read More
           <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

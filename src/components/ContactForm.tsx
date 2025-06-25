@@ -123,15 +123,14 @@ const ContactForm: React.FC = () => {
         {errors.message && (
           <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
         )}
-      </div>
-
-      <Button 
+      </div>      <Button 
         type="submit" 
         variant="primary" 
         size="lg" 
         disabled={isSubmitting}
-        icon={<Send size={18} />}
+        icon={<Send size={18} className="text-[#333333]" />}
         iconPosition="right"
+        className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
       >
         {isSubmitting ? 'Sending...' : 'Send Message'}
       </Button>
