@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 
@@ -11,6 +10,7 @@ interface HeroProps {
   primaryButtonText?: string;
   primaryButtonLink?: string;
   overlay?: boolean;
+  hideServicesButton?: boolean;
 }
 
 const Hero: React.FC<HeroProps> = ({
@@ -20,6 +20,7 @@ const Hero: React.FC<HeroProps> = ({
   primaryButtonText = 'Get in Touch',
   primaryButtonLink = '/contact',
   overlay = true,
+  hideServicesButton = false,
 }) => {
   return (
     <section 
@@ -56,33 +57,29 @@ const Hero: React.FC<HeroProps> = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >            <Link to={primaryButtonLink}>
-              <Button 
+                <Button 
                 variant="primary" 
                 size="lg"
-                icon={<ArrowRight size={20} className="text-[#333333]" />}
-                iconPosition="right"
-                className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
-              >
+                className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-white"
+                >
                 {primaryButtonText}
-              </Button>
+                </Button>
             </Link>
-            <Link to="/services">
-              <Button 
-                variant="secondary" 
-                size="lg"
-                icon={<ArrowRight size={20} className="text-[#333333]" />}
-                iconPosition="right"
-                className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
-              >
-                Explore Our Services
-              </Button>
-            </Link>
+            {!hideServicesButton && (
+              <Link to="/services">
+                <Button 
+                  variant="secondary" 
+                  size="lg"
+                  className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
+                >
+                  Explore Our Services
+                </Button>
+              </Link>
+            )}
             <Link to="/contact">
               <Button 
                 variant="outline" 
                 size="lg"
-                icon={<ArrowRight size={20} className="text-[#333333]" />}
-                iconPosition="right"
                 className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
               >
                 Partner With Us

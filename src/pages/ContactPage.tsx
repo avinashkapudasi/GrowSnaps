@@ -40,7 +40,7 @@ const ContactPage: React.FC = () => {
             <div className="lg:col-span-1">
               <SectionHeading
                 title="Contact Information"
-                description="Our team is available Monday through Friday from 9am to 5pm."
+                description="Feel free to reach out to us through any of the following methods:"
                 alignment="left"
               />
 

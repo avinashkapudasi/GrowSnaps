@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Users, ClipboardCheck, Puzzle as PuzzlePiece, Target, BarChart4, LineChart, PieChart, DollarSign, TrendingUp, Rocket, Share2, Globe, MessageSquare } from 'lucide-react';
+import { Lightbulb, Users, ClipboardCheck } from 'lucide-react';
 
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
@@ -9,85 +9,63 @@ import ServiceCard from '../components/ServiceCard';
 import Button from '../components/Button';
 
 const ServicesPage: React.FC = () => {
+  const [showAllServices, setShowAllServices] = useState(false);
+
   const services = [
     {
       icon: <Lightbulb size={24} />,
-      title: 'Idea Validation',
-      description: 'We evaluate your business concept through market research, competitor analysis, and validation techniques to assess viability and potential for success.'
+      title: 'Startup Acceleration',
+      description: 'From idea validation to MVP launch and investor readiness.',
+      details: [
+        'Idea Validation',
+        'Customer Discovery',
+        'Hypothesis Validation',
+        'Problem–Solution Fit',
+        'Product–Market Fit Validation',
+        'Business Model Design',
+        'Go-to-Market (GTM) Strategy',
+        'Pricing Strategy',
+        'Cost Optimization'
+      ]
     },
     {
       icon: <Users size={24} />,
-      title: 'Customer Discovery',
-      description: 'We help you identify and understand your ideal customers through interviews, surveys, and data analysis to inform product development and marketing strategies.'
+      title: 'Institutional Innovation Ecosystem Building',
+      description: 'Building entrepreneurship programs and incubation frameworks for institutions.',
+      details: [
+        'Entrepreneurial Mindset & Problem Discovery',
+        'Market Understanding & Solution Development',
+        'Building & Launching the Venture',
+        'NEP-aligned, modular learning content',
+        'A dedicated resource/mentor for your institution',
+        'Frameworks to make student teams funding-ready',
+        'Support to guide select student teams to achieve market fit'
+      ]
     },
     {
       icon: <ClipboardCheck size={24} />,
-      title: 'Hypothesis Validation',
-      description: 'We test your key business assumptions through structured experiments and data collection to minimize risk and optimize your business model.'
-    },
-    {
-      icon: <PuzzlePiece size={24} />,
-      title: 'Problem-Solution Fit',
-      description: 'We ensure your product or service effectively addresses real customer pain points through iterative testing and refinement.'
-    },
-    {
-      icon: <Target size={24} />,
-      title: 'Product Market Fit Validation',
-      description: 'We validate that your solution meets market demands and has the potential for sustainable growth and scalability.'
-    },
-    {
-      icon: <BarChart4 size={24} />,
-      title: 'Go-to-Market Strategy',
-      description: 'We develop comprehensive strategies that define your value proposition, target segments, pricing, and distribution channels for successful market entry.'
-    },
-    {
-      icon: <LineChart size={24} />,
-      title: 'Business Model',
-      description: 'We design and optimize your business model to create, deliver, and capture value efficiently and profitably.'
-    },
-    {
-      icon: <PieChart size={24} />,
-      title: 'Pricing Strategy',
-      description: 'We develop data-driven pricing models that maximize revenue and profitability while maintaining competitive positioning.'
-    },
-    {
-      icon: <DollarSign size={24} />,
-      title: 'Cost Optimization',
-      description: 'We identify opportunities to reduce operational costs while maintaining or improving quality and customer satisfaction.'
-    },
-    {
-      icon: <TrendingUp size={24} />,
-      title: 'Customer Acquisition',
-      description: 'We create efficient strategies to attract and convert customers through optimized marketing channels and conversion funnels.'
-    },
-    {
-      icon: <Rocket size={24} />,
-      title: 'Launch Plan',
-      description: 'We develop detailed launch strategies to maximize impact, generate buzz, and ensure successful market introduction.'
-    },
-    {
-      icon: <Share2 size={24} />,
-      title: 'Scale-Up Plan',
-      description: 'We create actionable growth roadmaps that outline the resources, processes, and strategies needed to scale your business efficiently.'
-    },
-    {
-      icon: <Globe size={24} />,
-      title: 'Digital Marketing',
-      description: 'We implement comprehensive digital marketing strategies across multiple channels to increase brand awareness and drive qualified leads.'
-    },
-    {
-      icon: <MessageSquare size={24} />,
-      title: 'Social Media Marketing',
-      description: 'We develop and execute social media strategies that build community, increase engagement, and drive conversions.'
+      title: 'Corporate Growth Consulting',
+      description: 'Strategic support for scaling, product-market alignment, and brand positioning.',
+      details: [
+        'Business Model Design',
+        'Go-to-Market (GTM) Strategy',
+        'Pricing Strategy',
+        'Cost Optimization',
+        'Customer Acquisition Planning',
+        'Launch Roadmap & Execution',
+        'Scale-Up Strategy',
+        'Digital Marketing Strategy'
+      ]
     },
   ];
 
   return (
     <>
       <Hero 
-        title="Comprehensive Business Growth Services"
+        title="Accelerating Growth Through Precision Strategy"
         subtitle="Our strategic consulting services are designed to help you navigate every stage of your business journey, from ideation to scaling for sustainable growth."
         imageSrc="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        hideServicesButton={true}
       />
 
       {/* Our Approach */}
@@ -167,21 +145,34 @@ const ServicesPage: React.FC = () => {
         <div className="container-custom">
           <SectionHeading
             subtitle="Our Services"
-            title="Comprehensive Growth Solutions"
+            title="We Grow What's Next — Startups, Strategies, and Systems."
             description="We offer a wide range of strategic consulting services designed to help businesses at every stage of their growth journey."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {(showAllServices ? services : services.slice(0, 3)).map((service, index) => (
               <ServiceCard
                 key={service.title}
                 icon={service.icon}
                 title={service.title}
                 description={service.description}
+                details={service.details}
                 delay={index * 0.05}
               />
             ))}
           </div>
+
+          {services.length > 3 && (
+            <div className="mt-12 text-center">
+              <Button 
+                variant="outline"
+                className="bg-[#F9C800] text-[#333333] hover:bg-[#F9C800] hover:text-[#333333] border-[#F9C800]"
+                onClick={() => setShowAllServices(!showAllServices)}
+              >
+                {showAllServices ? 'View Less Services' : 'View More Services'}
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 

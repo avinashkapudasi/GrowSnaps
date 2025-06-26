@@ -29,7 +29,6 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Portfolio', path: '/portfolio' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -62,7 +61,7 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-600"
+            className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#74B72E]"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -92,7 +91,7 @@ const Navbar = () => {
                     key={link.path}
                     to={link.path}
                     className={({ isActive }) => 
-                      `block py-2 px-3 ${isActive ? 'text-primary-600 font-semibold' : 'text-gray-700 hover:text-primary-600'}`
+                      `block py-2 px-3 ${isActive ? 'text-[#74B72E] font-semibold' : 'text-gray-700 hover:text-[#74B72E]'}`
                     }
                   >
                     {link.name}

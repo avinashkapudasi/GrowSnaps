@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Users, LineChart, Rocket,  } from 'lucide-react';
+import { Lightbulb, Users, Rocket, GraduationCap, Monitor } from 'lucide-react';
 
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
@@ -13,23 +13,23 @@ const HomePage: React.FC = () => {
   const services = [
     {
       icon: <Lightbulb size={24} />,
-      title: 'Idea Validation',
-      description: 'We help validate your business ideas through market research, competitor analysis, and customer feedback to ensure viability before investing resources.'
+      title: 'Idea Validation'
     },
     {
       icon: <Users size={24} />,
-      title: 'Customer Discovery',
-      description: 'Understand your target audience through in-depth research, interviews, and data analysis to create products that truly meet customer needs.'
+      title: 'Customer Discovery'
     },
     {
-      icon: <LineChart size={24} />,
-      title: 'Go-to-Market Strategy',
-      description: 'Develop comprehensive strategies that define your value proposition, target segments, pricing, and distribution channels for successful market entry.'
+      icon: <GraduationCap size={24} />,
+      title: 'Building Entrepreneurial Mindset '
+    },
+    {
+      icon: <Monitor size={24} />,
+      title: 'Building Innovation Ecosystem in Organizations'
     },
     {
       icon: <Rocket size={24} />,
-      title: 'Scale-Up Plan',
-      description: 'Create actionable growth roadmaps that outline the resources, processes, and strategies needed to scale your business efficiently and sustainably.'
+      title: 'Scale-Up Plan'
     }
   ];
 
@@ -54,12 +54,14 @@ const HomePage: React.FC = () => {
               <span className="text-primary-600 font-semibold">About GrowSnaps</span>
               <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">Your Partner in Strategy, Startup Success, and Innovation Culture.</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-               GrowSnaps Global Ventures is a strategy and innovation consulting firm that empowers startups, enterprises, and educational institutions to unlock their full potential. We work across all stages of the entrepreneurial journey — from ideation to scale — delivering hands-on support in product strategy, go-to-market planning, branding, and innovation ecosystem building.
-               Our programs are designed to nurture student innovators, guide early-stage founders, and help businesses refine their strategy, build scalable products, and grow with clarity. Whether you're a campus looking to create future entrepreneurs or a brand ready to disrupt, GrowSnaps is your partner in turning bold ideas into real-world impact.
-
+              GrowSnaps Global Ventures is a strategy and innovation consulting firm that partners with educational institutions, startups, and established businesses to unlock growth and drive meaningful impact.
+              </p>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                For startups and enterprises, we offer end-to-end consulting across product strategy, brand positioning, go-to-market planning, and business scaling. Whether you're validating an idea, launching a product, or repositioning for growth, our hands-on, outcome-driven approach ensures clarity, speed, and sustainability.
               </p>
               <p className="text-gray-600 mb-8 leading-relaxed">
-                Our expertise spans across customer discovery, hypothesis validation, product-market fit, go-to-market strategies, pricing optimization, digital marketing, and more. Whether you're launching a new venture or looking to scale efficiently, our tailored strategies help you navigate every stage of your business journey.
+               We help institutions build robust, NEP-aligned innovation ecosystems that inspire entrepreneurship and foster intrapreneurship among students. Through structured programs, we guide student innovators from problem discovery to venture creation — turning campuses into launchpads for real-world impact.
+
               </p>
               
             </motion.div>
@@ -86,21 +88,34 @@ const HomePage: React.FC = () => {
         <div className="container-custom">
           <SectionHeading
             subtitle="Our Expertise"
-            title="Comprehensive Business Growth Services"
+            title="Accelerating Growth Through Precision Strategy"
             description="We offer a wide range of strategic consulting services designed to help businesses at every stage of their growth journey, from ideation to market expansion."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
+            {services.slice(0, 4).map((service, index) => (
               <ServiceCard
                 key={service.title}
                 icon={service.icon}
                 title={service.title}
-                description={service.description}
                 delay={index * 0.1}
               />
             ))}
           </div>
+          
+          {/* Center the 5th card */}
+          {services.length > 4 && (
+            <div className="flex justify-center mt-8">
+              <div className="w-full max-w-sm">
+                <ServiceCard
+                  key={services[4].title}
+                  icon={services[4].icon}
+                  title={services[4].title}
+                  delay={0.4}
+                />
+              </div>
+            </div>
+          )}
 
           <div className="mt-12 text-center">
             <Link to="/services">

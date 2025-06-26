@@ -38,11 +38,11 @@
   }
   
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-6 rounded-md transition-all duration-300 inline-flex items-center justify-center;
+    @apply bg-[#74B72E] hover:bg-[#659A26] text-white font-medium py-2 px-6 rounded-md transition-all duration-300 inline-flex items-center justify-center;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-primary-600 border border-primary-600 font-medium py-2 px-6 rounded-md transition-all duration-300 inline-flex items-center justify-center;
+    @apply bg-white hover:bg-gray-50 text-[#74B72E] border border-[#74B72E] font-medium py-2 px-6 rounded-md transition-all duration-300 inline-flex items-center justify-center;
   }
   
   .section-padding {
@@ -50,11 +50,30 @@
   }
   
   .nav-link {
-    @apply inline-block py-2 px-3 text-gray-800 hover:text-primary-600 font-medium transition-colors duration-300;
+    @apply inline-block py-2 px-3 text-gray-800 hover:text-[#74B72E] font-medium transition-colors duration-300;
   }
   
   .nav-link-active {
-    @apply text-primary-600;
+    @apply text-[#74B72E];
+  }
+  
+  /* Custom scrollbar for service cards */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #74B72E;
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #659A26;
   }
 }
 
