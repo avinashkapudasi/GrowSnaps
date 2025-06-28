@@ -29,6 +29,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
+    { name: 'Portfolio', path: '/portfolio' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -44,7 +45,7 @@ const Navbar = () => {
               <img 
                 src={logo} 
                 alt="GrowSnaps Logo" 
-                className="h-20 w-auto  scale-150 hover:scale-200"
+                className="h-20 w-auto transform transition-transform duration-300 hover:scale-110"
               />
             </Link>
 

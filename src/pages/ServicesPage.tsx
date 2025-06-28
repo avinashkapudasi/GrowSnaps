@@ -147,8 +147,8 @@ const ServicesPage: React.FC = () => {
             subtitle="Our Services"
             title="We Grow What's Next — Startups, Strategies and Ecosystems."
             description="We offer a wide range of strategic consulting services designed to help businesses at every stage of their growth journey."
-            subtitleColor="text-red-500 text-xl"
-            titleColor="text-primary-700"
+            titleClassName="text-primary-700 font-semibold text-3xl"
+            
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

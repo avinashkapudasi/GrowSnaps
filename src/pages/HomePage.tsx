@@ -82,6 +82,8 @@ const HomePage: React.FC = () => {
             subtitle="Our Expertise"
             title="Accelerating Growth Through Precision Strategy"
             description="We offer a wide range of strategic consulting services designed to help businesses at every stage of their growth journey, from ideation to market expansion."
+            subtitleClassName="text-red-500 font-semibold text-3xl"
+            titleClassName="text-primary-700 text-3xl md:text-3xl font-bold mt-2 mb-6"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

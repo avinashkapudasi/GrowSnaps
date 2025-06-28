@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import TestimonialCard from '../components/TestimonialCard';
 import SectionHeading from '../components/SectionHeading';
 
@@ -80,31 +80,17 @@ const PortfolioPage: React.FC = () => {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="wait">
-              {testimonials.slice(0, visibleTestimonials).map((testimonial, index) => (
-                <motion.div
-                  key={`${testimonial.company}-${index}`}
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -30, scale: 0.95 }}
-                  transition={{ 
-                    duration: 0.6, 
-                    delay: index * 0.1,
-                    ease: [0.25, 0.1, 0.25, 1]
-                  }}
-                  layout
-                >
-                  <TestimonialCard
-                    quote={testimonial.quote}
-                    name={testimonial.name}
-                    title={testimonial.title}
-                    company={testimonial.company}
-                    imageSrc={testimonial.imageSrc}
-                    delay={0}
-                  />
-                </motion.div>
-              ))}
-            </AnimatePresence>
+            {testimonials.slice(0, visibleTestimonials).map((testimonial, index) => (
+              <TestimonialCard
+                key={`${testimonial.company}-${index}`}
+                quote={testimonial.quote}
+                name={testimonial.name}
+                title={testimonial.title}
+                company={testimonial.company}
+                imageSrc={testimonial.imageSrc}
+                delay={index * 0.1}
+              />
+            ))}
           </div>
 
           {/* Load More/Show Less Buttons */}
@@ -112,48 +98,30 @@ const PortfolioPage: React.FC = () => {
             {visibleTestimonials < testimonials.length && (
               <motion.button
                 onClick={loadMore}
-                className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-md transition-all duration-300 inline-flex items-center justify-center transform hover:scale-105 hover:shadow-lg"
+                className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-md transition-colors inline-flex items-center justify-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.3 }}
               >
                 Load More
-                <motion.svg 
-                  className="w-4 h-4 ml-2" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                  animate={{ y: [0, 2, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                >
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                </motion.svg>
+                </svg>
               </motion.button>
             )}
             
             {visibleTestimonials > 3 && (
               <motion.button
                 onClick={showLess}
-                className="bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-8 rounded-md transition-all duration-300 inline-flex items-center justify-center transform hover:scale-105 hover:shadow-lg"
+                className="bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-8 rounded-md transition-colors inline-flex items-center justify-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.3 }}
               >
                 Show Less
-                <motion.svg 
-                  className="w-4 h-4 ml-2" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                  animate={{ y: [0, -2, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                >
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
-                </motion.svg>
+                </svg>
               </motion.button>
             )}
           </div>
@@ -173,81 +141,45 @@ const PortfolioPage: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
               <motion.div 
                 className="text-center"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
               >
-                <motion.div 
-                  className="text-4xl md:text-5xl font-bold text-primary-600 mb-2"
-                  initial={{ scale: 0.5 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "backOut" }}
-                  viewport={{ once: true }}
-                >
-                  60+
-                </motion.div>
+                <div className="text-4xl md:text-5xl font-bold text-primary-600 mb-2">60+</div>
                 <p className="text-gray-600">Clients Served</p>
               </motion.div>
 
               <motion.div 
                 className="text-center"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
               >
-                <motion.div 
-                  className="text-4xl md:text-5xl font-bold text-primary-600 mb-2"
-                  initial={{ scale: 0.5 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.3, ease: "backOut" }}
-                  viewport={{ once: true }}
-                >
-                  1Cr+
-                </motion.div>
+                <div className="text-4xl md:text-5xl font-bold text-primary-600 mb-2">1Cr+</div>
                 <p className="text-gray-600">Grants Raised</p>
               </motion.div>
 
               <motion.div 
                 className="text-center"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
               >
-                <motion.div 
-                  className="text-4xl md:text-5xl font-bold text-primary-600 mb-2"
-                  initial={{ scale: 0.5 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
-                  viewport={{ once: true }}
-                >
-                  1000+
-                </motion.div>
+                <div className="text-4xl md:text-5xl font-bold text-primary-600 mb-2">1000+</div>
                 <p className="text-gray-600">Students Trained</p>
               </motion.div>
 
               <motion.div 
                 className="text-center"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: 0.5, delay: 0.3 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
               >
-                <motion.div 
-                  className="text-4xl md:text-5xl font-bold text-primary-600 mb-2"
-                  initial={{ scale: 0.5 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.5, ease: "backOut" }}
-                  viewport={{ once: true }}
-                >
-                  15+
-                </motion.div>
+                <div className="text-4xl md:text-5xl font-bold text-primary-600 mb-2">15+</div>
                 <p className="text-gray-600">Institutional Collaborations</p>
               </motion.div>
             </div>

@@ -9,6 +9,9 @@ interface SectionHeadingProps {
   titleColor?: string;
   subtitleColor?: string;
   descriptionColor?: string;
+  subtitleClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
 }
 
 const SectionHeading: React.FC<SectionHeadingProps> = ({
@@ -19,6 +22,9 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
   titleColor = 'text-gray-900',
   subtitleColor = 'text-primary-600',
   descriptionColor = 'text-gray-600',
+  subtitleClassName = '',
+  titleClassName = '',
+  descriptionClassName = '',
 }) => {
   const alignmentClasses = {
     left: 'text-left',
@@ -35,14 +41,14 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
           transition={{ duration: 0.5 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <span className={`inline-block text-sm font-semibold uppercase tracking-wider mb-2 ${subtitleColor}`}>
+          <span className={`inline-block text-sm font-semibold uppercase tracking-wider mb-2 ${subtitleColor} ${subtitleClassName}`}>
             {subtitle}
           </span>
         </motion.div>
       )}
       
       <motion.h2
-        className={`text-3xl md:text-4xl font-bold mb-4 ${titleColor}`}
+        className={`text-3xl md:text-4xl font-bold mb-4 ${titleColor} ${titleClassName}`}
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
@@ -53,7 +59,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       
       {description && (
         <motion.p
-          className={`text-lg ${descriptionColor}`}
+          className={`text-lg ${descriptionColor} ${descriptionClassName}`}
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
