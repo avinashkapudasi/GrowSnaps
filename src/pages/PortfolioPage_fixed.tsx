@@ -134,7 +134,7 @@ const PortfolioPage: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             <SectionHeading
               subtitle="Our Impact"
-              title="Driving Measurable Results"
+              title="IMPACT METRICS"
               description="Our strategic consulting has helped businesses achieve remarkable growth and success across various metrics, Our clients are recognized by IIT-H, IIM-V, Tetra Pak, WEHub, T-Hub"
             />
 
