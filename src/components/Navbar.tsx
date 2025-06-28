@@ -2,7 +2,7 @@ import  { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../assets/Grow Snaps_page-0001.jpg';
+import logo from '../assets/GrowSnaps.svg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,11 @@ const Navbar = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-            <img src={logo} alt="GrowSnaps Logo" className="h-12 w-22" />           
+              <img 
+                src={logo} 
+                alt="GrowSnaps Logo" 
+                className="h-20 w-auto  scale-150 hover:scale-200"
+              />
             </Link>
 
           {/* Desktop Navigation */}

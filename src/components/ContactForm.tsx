@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import emailjs from '@emailjs/browser';
 import Button from './Button';
-import { Send } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -12,6 +13,9 @@ interface FormData {
 }
 
 const ContactForm: React.FC = () => {
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
+
   const { 
     register, 
     handleSubmit, 
@@ -20,16 +24,40 @@ const ContactForm: React.FC = () => {
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
+    setSubmitStatus('idle');
+    setSubmitMessage('');
+
     try {
-      // In a real implementation, you would send this data to your backend
-      // For demo purposes, we're just simulating a delay and then resetting the form
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Form data:', data);
+      // EmailJS configuration from environment variables
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS configuration is missing. Please check your environment variables.');
+      }
+
+      // Prepare template parameters for EmailJS
+      const templateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        phone: data.phone,
+        subject: data.subject,
+        message: data.message,
+        to_name: 'GrowSnaps Team',
+      };
+
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      
+      console.log('Email sent successfully!');
+      setSubmitStatus('success');
+      setSubmitMessage('Message sent successfully! We\'ll get back to you soon.');
       reset();
-      alert('Message sent successfully!');
     } catch (error) {
-      console.error('Error sending message:', error);
-      alert('Failed to send message. Please try again.');
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+      setSubmitMessage('Failed to send message. Please check your connection and try again.');
     }
   };
 
@@ -123,7 +151,25 @@ const ContactForm: React.FC = () => {
         {errors.message && (
           <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
         )}
-      </div>      <Button 
+      </div>
+
+      {/* Submit status message */}
+      {submitMessage && (
+        <div className={`flex items-center gap-2 p-4 rounded-lg ${
+          submitStatus === 'success' 
+            ? 'bg-green-50 text-green-700 border border-green-200' 
+            : 'bg-red-50 text-red-700 border border-red-200'
+        }`}>
+          {submitStatus === 'success' ? (
+            <CheckCircle size={20} />
+          ) : (
+            <AlertCircle size={20} />
+          )}
+          <span>{submitMessage}</span>
+        </div>
+      )}
+
+      <Button 
         type="submit" 
         variant="primary" 
         size="lg" 

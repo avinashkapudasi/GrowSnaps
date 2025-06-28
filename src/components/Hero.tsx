@@ -76,15 +76,7 @@ const Hero: React.FC<HeroProps> = ({
                 </Button>
               </Link>
             )}
-            <Link to="/contact">
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
-              >
-                Partner With Us
-              </Button>
-            </Link>
+            
           </motion.div>
         </div>
       </div>

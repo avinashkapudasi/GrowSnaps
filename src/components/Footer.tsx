@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Company Info */}
         <div>
         <div className="flex items-center space-x-2 mb-4">
-          <img src={logo} alt="GrowSnaps Logo" className="h-20 w-auto" />
+          <img src={logo} alt="GrowSnaps Logo" className="w-32 h-auto" />
         </div>
         <p className="text-[#333333] mb-6">
           We transform ideas into scalable businesses with strategic insights and innovative solutions.
@@ -56,8 +56,9 @@ const Footer = () => {
           <li className="flex items-start space-x-3">
             <MapPin size={20} className="flex-shrink-0 mt-1" style={{ color: '#333333' }} />
             <span className="text-[#333333]">
-              123 Business Avenue, Tech Park<br />
-              Innovation District, 500001
+              Plot No - 141, MA Nagar, Near IT Junction, <br />
+              Midhilapuri Vuda Colony, Madhurawada,<br />
+              Visakhapatnam - 530048
             </span>
           </li>
         </ul>

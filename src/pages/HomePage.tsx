@@ -1,35 +1,27 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Users, Rocket, GraduationCap, Monitor } from 'lucide-react';
+import { Lightbulb, Users, Rocket } from 'lucide-react';
 
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import ServiceCard from '../components/ServiceCard';
-import TestimonialCard from '../components/TestimonialCard';
+
 import Button from '../components/Button';
 
 const HomePage: React.FC = () => {
   const services = [
     {
       icon: <Lightbulb size={24} />,
-      title: 'Idea Validation'
+      title: 'Startup Acceleration'
     },
     {
       icon: <Users size={24} />,
-      title: 'Customer Discovery'
-    },
-    {
-      icon: <GraduationCap size={24} />,
-      title: 'Building Entrepreneurial Mindset '
-    },
-    {
-      icon: <Monitor size={24} />,
-      title: 'Building Innovation Ecosystem in Organizations'
+      title: 'Innovation Ecosystem Design'
     },
     {
       icon: <Rocket size={24} />,
-      title: 'Scale-Up Plan'
+      title: 'Corporate Growth Consulting'
     }
   ];
 
@@ -51,8 +43,8 @@ const HomePage: React.FC = () => {
               transition={{ duration: 0.7 }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              <span className="text-primary-600 font-semibold">About GrowSnaps</span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">Your Partner in Strategy, Startup Success, and Innovation Culture.</h2>
+                <span className="text-red-500 font-semibold text-3xl">About GrowSnaps</span>
+              <h2 className="text-primary-700 text-3xl md:text-4xl font-bold mt-2 mb-6">Your Partner in Strategy, Startup Success, and Innovation Culture.</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
               GrowSnaps Global Ventures is a strategy and innovation consulting firm that partners with educational institutions, startups, and established businesses to unlock growth and drive meaningful impact.
               </p>
@@ -92,7 +84,7 @@ const HomePage: React.FC = () => {
             description="We offer a wide range of strategic consulting services designed to help businesses at every stage of their growth journey, from ideation to market expansion."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.slice(0, 4).map((service, index) => (
               <ServiceCard
                 key={service.title}
@@ -131,7 +123,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary-600 text-white">
+      <section className="py-16 bg-[#708090] text-white">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <motion.h2 
@@ -172,43 +164,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-gray-50">
-        <div className="container-custom">
-          <SectionHeading
-            subtitle="Client Success Stories"
-            title="What Our Clients Say"
-            description="Discover how our strategic consulting has helped businesses across industries achieve remarkable growth and success."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <TestimonialCard
-              quote="GrowSnaps helped us validate our market approach and refine our go-to-market strategy. Their insights were invaluable to our success."
-              name="Sarah Johnson"
-              title="CEO"
-              company="TechStart Solutions"
-              imageSrc="https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              delay={0.1}
-            />
-            <TestimonialCard
-              quote="The team's customer discovery process revealed crucial insights that completely transformed our product development roadmap."
-              name="Michael Chen"
-              title="Founder"
-              company="InnovateLab"
-              imageSrc="https://images.pexels.com/photos/3789888/pexels-photo-3789888.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              delay={0.2}
-            />
-            <TestimonialCard
-              quote="Their pricing strategy consultation helped us increase our margins by 22% while maintaining our competitive edge."
-              name="Jessica Williams"
-              title="COO"
-              company="Growth Dynamics"
-              imageSrc="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              delay={0.3}
-            />
-          </div>
-        </div>
-      </section>
+      
     </>
   );
 };

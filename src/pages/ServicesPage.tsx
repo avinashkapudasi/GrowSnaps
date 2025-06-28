@@ -145,19 +145,21 @@ const ServicesPage: React.FC = () => {
         <div className="container-custom">
           <SectionHeading
             subtitle="Our Services"
-            title="We Grow What's Next — Startups, Strategies, and Systems."
+            title="We Grow What's Next — Startups, Strategies and Ecosystems."
             description="We offer a wide range of strategic consulting services designed to help businesses at every stage of their growth journey."
+            subtitleColor="text-red-500 text-xl"
+            titleColor="text-primary-700"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {(showAllServices ? services : services.slice(0, 3)).map((service, index) => (
               <ServiceCard
-                key={service.title}
-                icon={service.icon}
-                title={service.title}
-                description={service.description}
-                details={service.details}
-                delay={index * 0.05}
+          key={service.title}
+          icon={service.icon}
+          title={service.title}
+          description={service.description}
+          details={service.details}
+          delay={index * 0.05}
               />
             ))}
           </div>
@@ -165,11 +167,11 @@ const ServicesPage: React.FC = () => {
           {services.length > 3 && (
             <div className="mt-12 text-center">
               <Button 
-                variant="outline"
-                className="bg-[#F9C800] text-[#333333] hover:bg-[#F9C800] hover:text-[#333333] border-[#F9C800]"
-                onClick={() => setShowAllServices(!showAllServices)}
+          variant="outline"
+          className="bg-[#F9C800] text-[#333333] hover:bg-[#F9C800] hover:text-[#333333] border-[#F9C800]"
+          onClick={() => setShowAllServices(!showAllServices)}
               >
-                {showAllServices ? 'View Less Services' : 'View More Services'}
+          {showAllServices ? 'View Less Services' : 'View More Services'}
               </Button>
             </div>
           )}
