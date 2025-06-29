@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import logo from '../assets/growsnaps_bg_removed.png'; // Add this import at the top
+import logo from '../assets/GrowSnaps.svg'; // Add this import at the top
 
 const Footer = () => {
   return (
