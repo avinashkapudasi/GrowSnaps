@@ -2,7 +2,7 @@ import  { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../assets/GrowSnaps.svg';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +45,7 @@ const Navbar = () => {
               <img 
                 src={logo} 
                 alt="GrowSnaps Logo" 
-                className="h-20 w-auto transform transition-transform duration-300 hover:scale-110"
+                className="h-10 scale-150 w-auto transform transition-transform duration-300 hover:scale-110"
               />
             </Link>
 
