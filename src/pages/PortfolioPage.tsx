@@ -284,7 +284,7 @@ const PortfolioPage: React.FC = () => {
               viewport={{ once: true }}
             >
               <a 
-                href="/contact"
+                href="/contactpage"
                 className="bg-white hover:bg-gray-100 text-primary-600 font-medium py-3 px-8 rounded-md transition-colors inline-flex items-center justify-center"
               >
                 Start Your Journey
