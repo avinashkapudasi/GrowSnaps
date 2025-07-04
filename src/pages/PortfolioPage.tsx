@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import TestimonialCard from '../components/TestimonialCard';
 import SectionHeading from '../components/SectionHeading';
+import Button from '../components/Button';
 
 const PortfolioPage: React.FC = () => {
   const [visibleTestimonials, setVisibleTestimonials] = useState(3);
@@ -283,15 +285,15 @@ const PortfolioPage: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <a 
-                href="/contact"
-                className="bg-white hover:bg-gray-100 text-primary-600 font-medium py-3 px-8 rounded-md transition-colors inline-flex items-center justify-center"
-              >
-                Start Your Journey
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
+              <Link to="/contact">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="bg-[#F9C800] text-[#333333] hover:bg-[#F9C800] hover:text-[#333333] border-[#F9C800]"
+                >
+                  Start your journey 
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </div>

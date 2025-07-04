@@ -95,7 +95,7 @@ const ContactPage: React.FC = () => {
               </div>
               </div>
 
-              <div className="mt-12">
+              {/* <div className="mt-12">
               <h3 className="font-semibold text-lg text-gray-900 mb-4">Follow Us</h3>
               <div className="flex space-x-4">
                 <a href="#" className="bg-gray-100 hover:bg-primary-100 transition-colors p-2 rounded-full text-gray-600 hover:text-primary-600">
@@ -119,7 +119,7 @@ const ContactPage: React.FC = () => {
                 </svg>
                 </a>
               </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
