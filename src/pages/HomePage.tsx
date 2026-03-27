@@ -28,9 +28,9 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Hero 
-        title="From Spark to Scale — We Grow Innovation at Every Stage."
-        subtitle="GrowSnaps Global Ventures partners with students, startups, and institutions to build powerful entrepreneurial ecosystems through hands-on training, innovation modules, and strategy consulting."
-        imageSrc="https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        title=""
+        subtitle=""
+        carousel
       />
 
       {/* About Section */}
