@@ -33,7 +33,7 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/[0.03] py-2'
-          : 'bg-white/60 backdrop-blur-md py-4'
+          : 'bg-transparent py-4'
       }`}
     >
       <div className="container-custom">
@@ -52,7 +52,7 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center">
             {/* Nav pill container */}
             <div className={`flex items-center gap-1 rounded-full px-1.5 py-1.5 transition-all duration-500 ${
-              isScrolled ? 'bg-gray-100/70' : 'bg-gray-50/80'
+              isScrolled ? 'bg-gray-100/70' : 'bg-white/10 backdrop-blur-sm'
             }`}>
               {navLinks.map((link) => (
                 <NavLink
@@ -62,7 +62,9 @@ const Navbar = () => {
                     `relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       isActive
                         ? 'text-white'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+                        : isScrolled
+                          ? 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+                          : 'text-white/80 hover:text-white hover:bg-white/15'
                     }`
                   }
                 >
@@ -89,8 +91,10 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `relative inline-flex items-center gap-2 py-2.5 px-6 rounded-full font-semibold text-sm transition-all duration-300 overflow-visible group ${
                     isActive
-                      ? 'bg-[#74B72E] text-white shadow-lg shadow-[#74B72E]/30'
-                      : 'bg-gradient-to-r from-[#74B72E] to-[#5f9925] text-white shadow-md shadow-[#74B72E]/20 hover:shadow-xl hover:shadow-[#74B72E]/40 hover:scale-105'
+                      ? 'bg-[#F9C800] text-gray-900 shadow-lg shadow-[#F9C800]/40 ring-2 ring-[#F9C800]/50'
+                      : isScrolled
+                        ? 'bg-gradient-to-r from-[#F9C800] to-[#e0b400] text-gray-900 shadow-md shadow-[#F9C800]/20 hover:shadow-xl hover:shadow-[#F9C800]/40 hover:scale-105'
+                        : 'bg-[#F9C800] text-gray-900 shadow-lg shadow-[#F9C800]/30 ring-2 ring-white/30 hover:shadow-xl hover:shadow-[#F9C800]/50 hover:scale-105'
                   }`
                 }
               >
@@ -104,13 +108,13 @@ const Navbar = () => {
                   <span className="absolute inset-0 animate-[shimmer_2.5s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                 </span>
 
-                <Rocket className="h-4 w-4 relative z-10 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110" />
-                <span className="relative z-10">Young Risers</span>
+                <Rocket className="h-4 w-4 relative z-10 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110 text-gray-900" />
+                <span className="relative z-10 text-gray-900 font-bold">Young Risers</span>
 
                 {/* Animated ping badge */}
                 <span className="absolute -top-2 -right-2 flex h-5 w-5 z-20">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-60" />
-                  <span className="relative inline-flex rounded-full h-5 w-5 bg-gradient-to-br from-yellow-300 to-yellow-500 items-center justify-center text-[9px] font-bold text-gray-900 shadow-md shadow-yellow-400/40 border border-yellow-300/50">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#74B72E] opacity-60" />
+                  <span className="relative inline-flex rounded-full h-5 w-5 bg-gradient-to-br from-[#74B72E] to-[#5f9925] items-center justify-center text-[9px] font-bold text-white shadow-md shadow-[#74B72E]/40 border border-[#74B72E]/50">
                     ✦
                   </span>
                 </span>
@@ -136,7 +140,11 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <motion.button
-            className="md:hidden relative p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#74B72E]/40 bg-gray-50 hover:bg-gray-100 transition-colors"
+            className={`md:hidden relative p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#74B72E]/40 transition-colors ${
+              isScrolled
+                ? 'bg-gray-50 hover:bg-gray-100'
+                : 'bg-white/10 hover:bg-white/20 backdrop-blur-sm'
+            }`}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
             whileTap={{ scale: 0.9 }}
@@ -150,7 +158,7 @@ const Navbar = () => {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <X className="h-5 w-5 text-gray-900" />
+                  <X className={`h-5 w-5 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -160,7 +168,7 @@ const Navbar = () => {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Menu className="h-5 w-5 text-gray-900" />
+                  <Menu className={`h-5 w-5 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -226,19 +234,19 @@ const Navbar = () => {
                   <NavLink
                     to="/young-risers"
                     className={({ isActive }) =>
-                      `relative flex items-center gap-3 py-3.5 px-5 rounded-2xl font-semibold text-sm transition-all duration-300 overflow-hidden group ${
+                      `relative flex items-center gap-3 py-3.5 px-5 rounded-2xl font-bold text-sm transition-all duration-300 overflow-hidden group ${
                         isActive
-                          ? 'bg-[#74B72E] text-white shadow-md shadow-[#74B72E]/20'
-                          : 'bg-gradient-to-r from-[#74B72E] to-[#5f9925] text-white shadow-md shadow-[#74B72E]/15'
+                          ? 'bg-[#F9C800] text-gray-900 shadow-md shadow-[#F9C800]/20'
+                          : 'bg-gradient-to-r from-[#F9C800] to-[#e0b400] text-gray-900 shadow-md shadow-[#F9C800]/15'
                       }`
                     }
                   >
                     <span className="absolute inset-0 overflow-hidden rounded-2xl">
-                      <span className="absolute inset-0 animate-[shimmer_2.5s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                      <span className="absolute inset-0 animate-[shimmer_2.5s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                     </span>
                     <Rocket className="h-4 w-4 relative z-10" />
                     <span className="relative z-10">Young Risers</span>
-                    <span className="ml-auto relative z-10 inline-flex h-5 px-1.5 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 items-center justify-center text-[9px] font-bold text-gray-900 uppercase tracking-wide shadow-sm">
+                    <span className="ml-auto relative z-10 inline-flex h-5 px-1.5 rounded-full bg-gradient-to-br from-[#74B72E] to-[#5f9925] items-center justify-center text-[9px] font-bold text-white uppercase tracking-wide shadow-sm">
                       ✦ New
                     </span>
                   </NavLink>

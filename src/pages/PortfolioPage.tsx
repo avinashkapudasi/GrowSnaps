@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Hero from '../components/Hero';
 import TestimonialCard from '../components/TestimonialCard';
 import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
@@ -56,21 +57,14 @@ const PortfolioPage: React.FC = () => {
 
   return (
     <>
-      <section className="pt-32 pb-16 bg-primary-600">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center text-white"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Portfolio</h1>
-            <p className="text-primary-100 text-lg">
-              Explore our successful client engagements and discover how we've helped businesses across various industries achieve sustainable growth.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <Hero
+        title="Our Portfolio"
+        subtitle="Explore our successful client engagements and discover how we've helped businesses across various industries achieve sustainable growth."
+        imageSrc="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        primaryButtonText="Start Your Journey"
+        primaryButtonLink="/contact"
+        hideServicesButton
+      />
 
       {/* Testimonials */}
       <section className="py-20 bg-gray-50">

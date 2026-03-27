@@ -1,28 +1,20 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import ContactForm from '../components/ContactForm';
 
 const ContactPage: React.FC = () => {
   return (
     <>
-      <section className="pt-32 pb-16 bg-primary-600">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center text-white"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h1>
-            <p className="text-primary-100 text-lg">
-              Have questions about our services? Ready to start your growth journey? 
-              Reach out to our team and we'll get back to you as soon as possible.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <Hero
+        title="Get In Touch"
+        subtitle="Have questions about our services? Ready to start your growth journey? Reach out to our team and we'll get back to you as soon as possible."
+        imageSrc="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        primaryButtonText="Call Us Now"
+        primaryButtonLink="tel:+919030457668"
+        hideServicesButton
+      />
 
       <section className="py-16 bg-white">
         <div className="container-custom">
