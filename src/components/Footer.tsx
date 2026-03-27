@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import logo from '../assets/logo.png'; // Add this import at the top
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Rocket, Sparkles } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
   return (
     <footer className="bg-[#708090] text-white pt-16 pb-8">
       <div className="container-custom">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Company Info */}
         <div>
         <div className="flex items-center space-x-2 mb-4">
@@ -38,6 +38,16 @@ const Footer = () => {
           <li><Link to="/" className="text-[#333333] hover:text-white transition-colors">Home</Link></li>
           <li><Link to="/services" className="text-[#333333] hover:text-white transition-colors">Services</Link></li>
           <li><Link to="/contact" className="text-[#333333] hover:text-white transition-colors">Contact</Link></li>
+          <li>
+            <Link
+              to="/young-risers"
+              className="group inline-flex items-center gap-2 px-3 py-1.5 -ml-3 rounded-full bg-[#74B72E]/10 hover:bg-[#74B72E]/20 text-[#74B72E] hover:text-[#5f9925] font-semibold transition-all duration-300"
+            >
+              <Rocket className="h-3.5 w-3.5 transition-transform group-hover:-rotate-12" />
+              <span>Young Risers</span>
+              <Sparkles className="h-3 w-3 opacity-60" />
+            </Link>
+          </li>
         </ul>
         </div>
 
