@@ -80,3 +80,8 @@
 .clip-path-slant {
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
 }
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
