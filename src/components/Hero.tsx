@@ -198,7 +198,8 @@ const Hero: React.FC<HeroProps> = ({
   carousel = false,
 }) => {
   const [[current, direction], setCurrent] = useState([0, 0]);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const resumeTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const paginate = useCallback(
     (newDirection: number) => {
@@ -210,16 +211,30 @@ const Hero: React.FC<HeroProps> = ({
     []
   );
 
+  // Auto-play: always runs unless paused
   useEffect(() => {
-    if (!carousel || !isAutoPlaying) return;
+    if (!carousel || isPaused) return;
     const timer = setInterval(() => paginate(1), 6000);
     return () => clearInterval(timer);
-  }, [carousel, isAutoPlaying, paginate]);
+  }, [carousel, isPaused, paginate, current]);
+
+  // Pause temporarily and resume after delay
+  const pauseAndResume = useCallback(() => {
+    setIsPaused(true);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = setTimeout(() => setIsPaused(false), 8000);
+  }, []);
+
+  // Cleanup resume timer on unmount
+  useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    };
+  }, []);
 
   const goToSlide = (index: number) => {
     setCurrent(([prev]) => [index, index > prev ? 1 : -1]);
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+    pauseAndResume();
   };
 
   // ─── Carousel mode ───
@@ -229,8 +244,8 @@ const Hero: React.FC<HeroProps> = ({
     return (
       <section
         className="relative min-h-screen overflow-hidden"
-        onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.div
@@ -249,14 +264,14 @@ const Hero: React.FC<HeroProps> = ({
 
         {/* Navigation Arrows */}
         <button
-          onClick={() => { paginate(-1); setIsAutoPlaying(false); setTimeout(() => setIsAutoPlaying(true), 10000); }}
+          onClick={() => { paginate(-1); pauseAndResume(); }}
           className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/25 border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 group"
           aria-label="Previous slide"
         >
           <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
         </button>
         <button
-          onClick={() => { paginate(1); setIsAutoPlaying(false); setTimeout(() => setIsAutoPlaying(true), 10000); }}
+          onClick={() => { paginate(1); pauseAndResume(); }}
           className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/25 border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 group"
           aria-label="Next slide"
         >
@@ -276,7 +291,7 @@ const Hero: React.FC<HeroProps> = ({
               }`}
               aria-label={`Go to slide ${i + 1}`}
             >
-              {current === i && isAutoPlaying && (
+              {current === i && !isPaused && (
                 <motion.span
                   className="absolute inset-0 rounded-full bg-white/60 origin-left"
                   initial={{ scaleX: 0 }}
