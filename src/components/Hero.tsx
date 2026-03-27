@@ -17,7 +17,7 @@ const Hero: React.FC<HeroProps> = ({
   title,
   subtitle,
   imageSrc = 'https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  primaryButtonText = 'Get in Touch',
+  primaryButtonText = 'Get in Touch with us',
   primaryButtonLink = '/contact',
   overlay = true,
   hideServicesButton = false,
