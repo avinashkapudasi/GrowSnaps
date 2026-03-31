@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:payments": "npx vercel dev",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -13,10 +14,12 @@
     "@emailjs/browser": "^4.4.1",
     "framer-motion": "^11.0.5",
     "lucide-react": "^0.344.0",
+    "razorpay": "^2.9.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.50.1",
-    "react-router-dom": "^6.22.1"
+    "react-router-dom": "^6.22.1",
+    "resend": "^6.9.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

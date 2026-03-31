@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-  Rocket, Lightbulb, Users, Target, Presentation, Award,
-  BookOpen, Brain, TrendingUp, Star, Sparkles, GraduationCap,
-  ChevronRight, Download
+  Rocket, Award, BookOpen, Star, Sparkles, GraduationCap,
+  ChevronRight, Download, ArrowRight, Sprout, Search, Cpu, TrendingUp, Flag,
+  Lightbulb, Layers, Briefcase, MessageSquareQuote, Users
 } from 'lucide-react';
 import brochureFile from '../assets/Website.docx';
 
@@ -76,8 +76,11 @@ const YoungRisersPage: React.FC = () => {
             <motion.h1 {...fadeUp} className="text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-6 leading-tight">
               Young Risers <span className="text-[#74B72E]">Program</span>
             </motion.h1>
+            <motion.p {...fadeUp} className="text-xl md:text-2xl text-white font-semibold mb-3 leading-snug max-w-3xl">
+              India's Structured Youth Entrepreneurship Program to Build Real Founders Early
+            </motion.p>
             <motion.p {...fadeUp} className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl">
-              A transformative entrepreneurship experience for young minds aged 13–19. Build real ventures, develop leadership skills, and launch your future.
+              From mindset to market - students don't just learn entrepreneurship, they build it.
             </motion.p>
             <motion.div {...fadeUp} className="flex flex-wrap gap-4">
               <Link
@@ -165,25 +168,38 @@ const YoungRisersPage: React.FC = () => {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
             {[
-              { icon: Lightbulb, title: 'Ideation & Discovery', desc: 'Learn to identify real problems and brainstorm innovative solutions through design thinking workshops.' },
-              { icon: Users, title: 'Team Building', desc: 'Form diverse teams and learn collaboration, communication, and leadership skills.' },
-              { icon: Target, title: 'Market Research', desc: 'Understand your audience through surveys, interviews, and competitive analysis.' },
-              { icon: Brain, title: 'Product Development', desc: 'Build prototypes and MVPs using lean startup methodology and rapid experimentation.' },
-              { icon: TrendingUp, title: 'Business Strategy', desc: 'Create business models, pricing strategies, and go-to-market plans.' },
-              { icon: Presentation, title: 'Pitch & Present', desc: 'Master the art of storytelling and present your venture to a panel of industry experts.' },
+              { phase: 'PHASE 1', title: 'GROW', desc: 'Identity & Problem Discovery', icon: Sprout },
+              { phase: 'PHASE 2', title: 'SNAP', desc: 'Market Understanding', icon: Search },
+              { phase: 'PHASE 3', title: 'BUILD', desc: 'AI + Product Creation', icon: Cpu },
+              { phase: 'PHASE 4', title: 'RISE', desc: 'Business Strategy', icon: TrendingUp },
+              { phase: 'PHASE 5', title: 'LEAD', desc: 'Leadership & Execution', icon: Flag },
             ].map((item, i) => (
               <motion.div
-                key={item.title}
+                key={item.phase}
                 {...fadeUp}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#74B72E]/30 hover:shadow-lg hover:shadow-[#74B72E]/5 transition-all duration-300"
+                className="group relative bg-white rounded-[28px] p-6 border border-gray-100 hover:border-[#74B72E]/30 hover:shadow-lg hover:shadow-[#74B72E]/5 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#74B72E]/10 flex items-center justify-center mb-4 group-hover:bg-[#74B72E]/20 transition-colors">
-                  <item.icon className="h-6 w-6 text-[#74B72E]" />
+                {i < 4 && (
+                  <div className="hidden xl:flex absolute top-11 -right-5 items-center text-[#74B72E]/45 pointer-events-none">
+                    <div className="w-8 h-px bg-[#74B72E]/35" />
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                )}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-14 h-14 rounded-full bg-[#74B72E] text-white flex items-center justify-center shadow-lg shadow-[#74B72E]/20 text-lg font-bold">
+                    {i + 1}
+                  </div>
+                  <div className="w-12 h-12 rounded-2xl bg-[#74B72E]/10 text-[#74B72E] flex items-center justify-center group-hover:bg-[#74B72E]/15 transition-colors">
+                    <item.icon className="h-6 w-6" />
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#74B72E]/10 text-[#74B72E] text-xs font-semibold uppercase tracking-wider mb-4 group-hover:bg-[#74B72E]/15 transition-colors">
+                  {item.phase}
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
@@ -209,10 +225,10 @@ const YoungRisersPage: React.FC = () => {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
-              { title: 'Learn by Doing', desc: 'Every session is hands-on. Students build, test, and iterate on real projects — not just theory.', icon: '🛠️' },
-              { title: 'Mentorship-Driven', desc: 'Each team is paired with industry mentors who provide guidance, feedback, and real-world perspective.', icon: '🧭' },
-              { title: 'Peer Collaboration', desc: 'Teams work together on challenges, fostering communication, negotiation, and leadership skills.', icon: '🤝' },
-              { title: 'Reflective Practice', desc: 'Regular reflection sessions help students internalize lessons and connect learning to their lives.', icon: '💡' },
+                { title: 'SELF-PACED LMS', desc: 'Structured modules + assignments', icon: '📚' },
+                { title: 'LIVE SESSIONS', desc: 'Weekly expert-led sessions', icon: '🎙️' },
+                { title: 'BUSINESS CHALLENGES', desc: 'Fortnightly real-world tasks', icon: '🏁' },
+                { title: 'WORKSHOPS', desc: 'Hands-on activities & simulations', icon: '🛠️' },
             ].map((item, i) => (
               <motion.div
                 key={item.title}
@@ -271,30 +287,57 @@ const YoungRisersPage: React.FC = () => {
       <section
         id="demoday"
         ref={(el) => { sectionRefs.current[4] = el; }}
-        className="py-20 bg-gray-50"
+        className="py-20 bg-gradient-to-br from-[#f7fde9] via-white to-[#fff8e8]"
       >
         <div className="container-custom">
-          <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#74B72E]/10 text-[#74B72E] text-xs font-semibold uppercase tracking-wider mb-4">
-              <Award className="h-3.5 w-3.5" /> The Grand Finale
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Demo <span className="text-[#74B72E]">Day</span>
-            </h2>
-            <p className="text-gray-600 text-lg leading-relaxed mb-8">
-              The program culminates in an exciting Demo Day where student teams pitch their ventures to a panel of investors, entrepreneurs, and community leaders. It's the ultimate test of everything they've learned — and a launchpad for what comes next.
-            </p>
-            <div className="grid sm:grid-cols-3 gap-4 text-center">
+          <motion.div
+            {...fadeUp}
+            className="relative max-w-6xl mx-auto rounded-[32px] bg-gradient-to-br from-[#1a2e05] via-[#28420d] to-[#1a2e05] px-6 py-12 md:px-10 md:py-14 overflow-hidden shadow-[0_24px_80px_rgba(26,46,5,0.18)]"
+          >
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+              <div className="absolute -top-16 left-12 w-44 h-44 rounded-full bg-[#74B72E] blur-3xl" />
+              <div className="absolute bottom-0 right-0 w-56 h-56 rounded-full bg-yellow-300 blur-3xl" />
+            </div>
+
+            <div className="relative z-10 text-center mb-10">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#d8f2b7] text-xs font-semibold uppercase tracking-wider mb-4 border border-white/10">
+                <Award className="h-3.5 w-3.5" /> The Grand Finale
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Demo <span className="text-[#9fe14f]">Day</span>
+              </h2>
+              <p className="text-xl md:text-2xl font-semibold text-white mb-3">
+                Where Students Become Founders
+              </p>
+              <p className="text-[#d6dfcb] text-lg leading-relaxed max-w-2xl mx-auto">
+                Demo Day brings every phase together in one final founder showcase with live energy, real feedback, and proud families in the room.
+              </p>
+            </div>
+
+            <div className="relative z-10 grid sm:grid-cols-2 xl:grid-cols-5 gap-4 text-left">
               {[
-                { label: 'Live Pitches', value: '5 min', sub: 'per team' },
-                { label: 'Expert Panel', value: '10+', sub: 'judges' },
-                { label: 'Awards', value: '₹50K+', sub: 'in prizes' },
-              ].map((stat) => (
-                <div key={stat.label} className="bg-white rounded-2xl p-5 border border-gray-100">
-                  <div className="text-2xl font-bold text-[#74B72E]">{stat.value}</div>
-                  <div className="text-sm font-semibold text-gray-900">{stat.label}</div>
-                  <div className="text-xs text-gray-500">{stat.sub}</div>
-                </div>
+                { label: 'Present validated ideas', icon: Lightbulb },
+                { label: 'Showcase prototypes', icon: Layers },
+                { label: 'Explain business models', icon: Briefcase },
+                { label: 'Receive jury feedback', icon: MessageSquareQuote },
+                { label: 'Parents & mentors invited', icon: Users },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  {...fadeUp}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="group rounded-3xl bg-white/95 backdrop-blur-sm p-5 border border-white/60 hover:-translate-y-1 hover:bg-white transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-full bg-[#74B72E] text-white flex items-center justify-center text-sm font-bold shadow-lg shadow-[#74B72E]/25">
+                      {index + 1}
+                    </div>
+                    <div className="w-11 h-11 rounded-2xl bg-[#74B72E]/10 text-[#74B72E] flex items-center justify-center group-hover:bg-[#74B72E]/15 transition-colors">
+                      <item.icon className="h-5 w-5" />
+                    </div>
+                  </div>
+                  <div className="text-base font-semibold text-gray-900 leading-relaxed">{item.label}</div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
