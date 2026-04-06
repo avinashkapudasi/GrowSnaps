@@ -49,7 +49,7 @@ export default async function handler(req, res) {
         program: 'Young Risers',
       },
       reminder_enable: true,
-      callback_url: `${getRequiredEnv('APP_BASE_URL')}/enroll?payment=success`,
+      callback_url: `${getRequiredEnv('APP_BASE_URL')}/young-risers/enroll?payment=success`,
       callback_method: 'get',
     });
 
