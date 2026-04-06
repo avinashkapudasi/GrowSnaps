@@ -73,8 +73,11 @@ export default async function handler(req, res) {
     });
   } catch (error) {
     console.error('Submit enrollment error:', error);
+    const errMsg = error instanceof Error ? error.message : String(error);
     res.status(500).json({
-      message: error instanceof Error ? error.message : 'Unable to process enrollment. Please try again.',
+      message: errMsg || 'Unable to process enrollment. Please try again.',
+      // Remove 'detail' before going to production with live keys
+      detail: process.env.NODE_ENV !== 'production' ? errMsg : undefined,
     });
   }
 }
