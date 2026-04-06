@@ -72,12 +72,18 @@ export default async function handler(req, res) {
       message: `We've sent an email to ${email} with your enrollment details and a secure payment link. Please check your inbox to complete the payment.`,
     });
   } catch (error) {
-    console.error('Submit enrollment error:', error);
-    const errMsg = error instanceof Error ? error.message : String(error);
-    res.status(500).json({
-      message: errMsg || 'Unable to process enrollment. Please try again.',
-      // Remove 'detail' before going to production with live keys
-      detail: process.env.NODE_ENV !== 'production' ? errMsg : undefined,
-    });
+    console.error('Submit enrollment error:', JSON.stringify(error, null, 2));
+
+    let errMsg = 'Unable to process enrollment. Please try again.';
+    if (error instanceof Error) {
+      errMsg = error.message;
+    } else if (error?.error?.description) {
+      // Razorpay SDK error shape
+      errMsg = error.error.description;
+    } else if (typeof error === 'string') {
+      errMsg = error;
+    }
+
+    res.status(500).json({ message: errMsg });
   }
 }
