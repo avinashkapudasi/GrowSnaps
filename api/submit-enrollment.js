@@ -57,7 +57,7 @@ export default async function handler(req, res) {
     const resend = new Resend(getRequiredEnv('RESEND_API_KEY'));
     const from = getRequiredEnv('PAYMENT_MAIL_FROM');
 
-    await resend.emails.send({
+    const { data: emailData, error: emailError } = await resend.emails.send({
       from,
       to: [email],
       subject: 'GrowSnaps Young Risers – Review Details & Complete Payment',
@@ -67,6 +67,14 @@ export default async function handler(req, res) {
         amountInRupees,
       }),
     });
+
+    if (emailError) {
+      console.error('Resend email error:', JSON.stringify(emailError));
+      res.status(500).json({
+        message: `Payment link created but email failed: ${emailError.message || 'Unknown email error'}. Your payment link: ${paymentLink.short_url}`,
+      });
+      return;
+    }
 
     res.status(200).json({
       message: `We've sent an email to ${email} with your enrollment details and a secure payment link. Please check your inbox to complete the payment.`,
