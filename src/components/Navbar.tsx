@@ -43,7 +43,7 @@ const Navbar = () => {
             <motion.img
               src={logo}
               alt="GrowSnaps Logo"
-              className="h-16 w-auto transition-transform duration-300 group-hover:scale-105"
+              className="h-24 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg"
               whileTap={{ scale: 0.95 }}
             />
           </Link>
