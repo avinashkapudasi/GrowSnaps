@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Company Info */}
         <div>
         <div className="flex items-center space-x-2 mb-4">
-          <img src={logo} alt="GrowSnaps Logo" className="w-32 h-auto" />
+          <img src={logo} alt="GrowSnaps Logo" className="w-48 h-auto object-contain" />
         </div>
         <p className="text-[#333333] mb-6">
           We transform ideas into scalable businesses with strategic insights and innovative solutions.
