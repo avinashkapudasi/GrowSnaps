@@ -77,6 +77,17 @@ const Footer = () => {
 
       <div className="border-t border-gray-800 mt-12 pt-8 text-center text-sm" style={{ color: '#333333' }}>
         <p>&copy; {new Date().getFullYear()} GrowSnaps Global Ventures. All rights reserved.</p>
+        <p className="mt-2">
+          Developed by{' '}
+          <a
+            href="https://www.webtechstrategies.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#F9C800] font-medium transition-colors underline underline-offset-2"
+          >
+            WebTechStrategies
+          </a>
+        </p>
       </div>
       </div>
     </footer>
