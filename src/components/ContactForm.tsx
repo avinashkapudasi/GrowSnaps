@@ -8,11 +8,16 @@ interface FormData {
   name: string;
   email: string;
   phone: string;
+  program: string;
   subject: string;
   message: string;
 }
 
-const ContactForm: React.FC = () => {
+interface ContactFormProps {
+  defaultProgram?: string;
+}
+
+const ContactForm: React.FC<ContactFormProps> = ({ defaultProgram = '' }) => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
 
@@ -20,8 +25,15 @@ const ContactForm: React.FC = () => {
     register, 
     handleSubmit, 
     formState: { errors, isSubmitting },
-    reset
-  } = useForm<FormData>();
+    reset,
+    watch
+  } = useForm<FormData>({
+    defaultValues: {
+      program: defaultProgram,
+    },
+  });
+
+  const selectedProgram = watch('program');
 
   const onSubmit = async (data: FormData) => {
     setSubmitStatus('idle');
@@ -42,7 +54,8 @@ const ContactForm: React.FC = () => {
         from_name: data.name,
         from_email: data.email,
         phone: data.phone,
-        subject: data.subject,
+        program: data.program,
+        subject: data.program === 'Other' ? data.subject : `Inquiry about ${data.program}`,
         message: data.message,
         to_name: 'GrowSnaps Team',
       };
@@ -113,10 +126,36 @@ const ContactForm: React.FC = () => {
             type="tel"
             className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-primary-500`}
             placeholder="+91 9030457668"
-            {...register('phone')}
+            {...register('phone', { required: 'Phone number is required' })}
           />
+          {errors.phone && (
+            <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+          )}
         </div>
 
+        <div>
+          <label htmlFor="program" className="block text-sm font-medium text-gray-700 mb-1">
+            Interested Program
+          </label>
+          <select
+            id="program"
+            className={`w-full px-4 py-3 rounded-lg border ${errors.program ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white`}
+            {...register('program', { required: 'Please select a program' })}
+          >
+            <option value="">Select a program</option>
+            <option value="Young Risers">Young Risers</option>
+            <option value="Venture Forge">Venture Forge</option>
+            <option value="Venture Sprint">Venture Sprint</option>
+            <option value="Mentorship">Mentorship</option>
+            <option value="Other">Other</option>
+          </select>
+          {errors.program && (
+            <p className="mt-1 text-sm text-red-600">{errors.program.message}</p>
+          )}
+        </div>
+      </div>
+
+      {selectedProgram === 'Other' && (
         <div>
           <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
             Subject
@@ -126,13 +165,13 @@ const ContactForm: React.FC = () => {
             type="text"
             className={`w-full px-4 py-3 rounded-lg border ${errors.subject ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-primary-500`}
             placeholder="How can we help you?"
-            {...register('subject', { required: 'Subject is required' })}
+            {...register('subject', { required: selectedProgram === 'Other' ? 'Subject is required' : false })}
           />
           {errors.subject && (
             <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
           )}
         </div>
-      </div>
+      )}
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">

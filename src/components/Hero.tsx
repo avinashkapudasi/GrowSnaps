@@ -30,6 +30,18 @@ interface HeroProps {
 
 const carouselSlides: HeroSlide[] = [
   {
+    title: "Building India's NextGen Entrepreneurs",
+    subtitle:
+      'GrowSnaps Global Ventures is an Entrepreneurial Ecosystem Enabler — empowering students, startups, and institutions to build, launch, and scale impactful ventures.',
+    imageSrc:
+      'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    primaryButtonText: 'View our Portfolio',
+    primaryButtonLink: '/portfolio',
+    secondaryButtonText: 'Get in Touch',
+    secondaryButtonLink: '/contact',
+    variant: 'default',
+  },
+  {
     title: 'From Spark to Scale — We Grow Innovation at Every Stage.',
     subtitle:
       'GrowSnaps Global Ventures partners with students, startups, and institutions to build powerful entrepreneurial ecosystems through hands-on training, innovation modules, and strategy consulting.',

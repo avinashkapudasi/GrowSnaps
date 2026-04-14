@@ -9,6 +9,13 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
+  // Pages with light backgrounds where the navbar needs dark text even without scrolling
+  const lightBgPages = ['/young-risers/enroll', '/contact'];
+  const isLightBgPage = lightBgPages.some(
+    (path) => location.pathname === path || location.pathname.startsWith(path + '/')
+  );
+  const useDarkNav = isScrolled || isLightBgPage;
+
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
@@ -24,6 +31,8 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
+    { name: 'Programs', path: '/programs' },
+    { name: 'Mentors', path: '/mentors' },
     { name: 'Portfolio', path: '/portfolio' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -31,7 +40,7 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
+        useDarkNav
           ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/[0.03] py-2'
           : 'bg-transparent py-4'
       }`}
@@ -52,7 +61,7 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center">
             {/* Nav pill container */}
             <div className={`flex items-center gap-1 rounded-full px-1.5 py-1.5 transition-all duration-500 ${
-              isScrolled ? 'bg-gray-100/70' : 'bg-white/10 backdrop-blur-sm'
+              useDarkNav ? 'bg-gray-100/70' : 'bg-white/10 backdrop-blur-sm'
             }`}>
               {navLinks.map((link) => (
                 <NavLink
@@ -62,7 +71,7 @@ const Navbar = () => {
                     `relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       isActive
                         ? 'text-white'
-                        : isScrolled
+                        : useDarkNav
                           ? 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
                           : 'text-white/80 hover:text-white hover:bg-white/15'
                     }`
@@ -92,7 +101,7 @@ const Navbar = () => {
                   `relative inline-flex items-center gap-2 py-2.5 px-6 rounded-full font-semibold text-sm transition-all duration-300 overflow-visible group ${
                     isActive
                       ? 'bg-[#F9C800] text-gray-900 shadow-lg shadow-[#F9C800]/40 ring-2 ring-[#F9C800]/50'
-                      : isScrolled
+                      : useDarkNav
                         ? 'bg-gradient-to-r from-[#F9C800] to-[#e0b400] text-gray-900 shadow-md shadow-[#F9C800]/20 hover:shadow-xl hover:shadow-[#F9C800]/40 hover:scale-105'
                         : 'bg-[#F9C800] text-gray-900 shadow-lg shadow-[#F9C800]/30 ring-2 ring-white/30 hover:shadow-xl hover:shadow-[#F9C800]/50 hover:scale-105'
                   }`
@@ -141,7 +150,7 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <motion.button
             className={`md:hidden relative p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#74B72E]/40 transition-colors ${
-              isScrolled
+              useDarkNav
                 ? 'bg-gray-50 hover:bg-gray-100'
                 : 'bg-white/10 hover:bg-white/20 backdrop-blur-sm'
             }`}
@@ -158,7 +167,7 @@ const Navbar = () => {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <X className={`h-5 w-5 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
+                  <X className={`h-5 w-5 ${useDarkNav ? 'text-gray-900' : 'text-white'}`} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -168,7 +177,7 @@ const Navbar = () => {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Menu className={`h-5 w-5 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
+                  <Menu className={`h-5 w-5 ${useDarkNav ? 'text-gray-900' : 'text-white'}`} />
                 </motion.div>
               )}
             </AnimatePresence>

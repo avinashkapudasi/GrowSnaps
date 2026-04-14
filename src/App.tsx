@@ -8,6 +8,8 @@ import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
 import YoungRisersPage from './pages/YoungRisersPage';
 import EnrollPage from './pages/EnrollPage';
+import ProgramsPage from './pages/ProgramsPage';
+import MentorsPage from './pages/MentorsPage';
 
 function App() {
   const { pathname } = useLocation();
@@ -25,6 +27,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/programs" element={<ProgramsPage />} />
+          <Route path="/mentors" element={<MentorsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/young-risers" element={<YoungRisersPage />} />
           <Route path="/young-risers/enroll" element={<EnrollPage />} />
