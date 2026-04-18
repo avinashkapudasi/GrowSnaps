@@ -1,11 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Linkedin, Twitter, ArrowRight } from 'lucide-react';
+import { Linkedin, Twitter } from 'lucide-react';
 
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
 
 interface Mentor {
   name: string;
@@ -25,21 +23,20 @@ const mentors: Mentor[] = [
     role: 'Startup Strategy Mentor',
     expertise: ['Business Strategy', 'Go-to-Market', 'Fundraising'],
     bio: 'With 15+ years of experience in startup ecosystems, Rajesh has mentored over 100 startups from ideation to scale. He specializes in business model innovation and investor readiness.',
-    image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
+    image: new URL('../assets/Hari.jpeg', import.meta.url).href,
     program: 'Venture Sprint',
     programColor: '#10B981',
     linkedin: '#',
   },
   {
-    name: 'Priya Nair',
-    role: 'Innovation & Design Thinking Coach',
-    expertise: ['Design Thinking', 'Product Strategy', 'UX Research'],
-    bio: 'Priya brings a human-centered design approach to entrepreneurship. She helps founders understand their customers deeply and build products people love.',
-    image: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400',
+    name: 'Namrata Yantrapragada',
+    role: 'Co-founder & CEO, GrowSnaps Global Ventures',
+    expertise: ['Product Strategy', 'Customer Discovery', 'Market Research', 'Startup Building', 'Go-to-Market Strategy', 'Design Thinking'],
+    bio: 'Namrata is a dynamic entrepreneur and product strategist focused on building health-centric and impact-driven ventures. She designs experiential entrepreneurship programs enabling students to think critically, validate real-world problems, and build scalable solutions. With a background in pharmacy and expertise in product development and startup execution, she mentors aspiring entrepreneurs in problem discovery, customer validation, and building sustainable, user-centric businesses.',
+    image: new URL('../assets/namrata.jpeg', import.meta.url).href,
     program: 'Venture Forge',
     programColor: '#F97316',
-    linkedin: '#',
-    twitter: '#',
+    linkedin: 'https://www.linkedin.com/in/namrata-yantrapragada-a74995173',
   },
 ];
 
@@ -214,116 +211,6 @@ const MentorsPage: React.FC = () => {
                 <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Join Us as a Mentor CTA */}
-      <section className="py-24 bg-gray-900 text-white relative overflow-hidden">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
-            backgroundSize: '40px 40px',
-          }} />
-        </div>
-
-        <div className="container-custom relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.span
-              className="inline-block text-sm font-semibold uppercase tracking-widest text-[#F9C800] mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Give Back &amp; Grow
-            </motion.span>
-            <motion.h2
-              className="text-3xl md:text-5xl font-bold mb-6 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Join Us as a Mentor
-            </motion.h2>
-            <motion.p
-              className="text-lg text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Share your expertise, inspire the next generation of entrepreneurs, and be part of a
-              community that's shaping the future of innovation in India. Whether you're a seasoned
-              founder, industry leader, or domain expert — there's a place for you here.
-            </motion.p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <Link to="/contact">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="bg-[#F97316] hover:bg-[#EA580C] text-white px-10 py-4 text-base font-bold rounded-full shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transition-all duration-300"
-                >
-                  Become a Mentor <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Existing Learn CTA */}
-      <section className="py-16 bg-[#708090] text-white">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Want to Learn from the Best?
-            </motion.h2>
-            <motion.p
-              className="text-lg text-gray-200 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Join one of our programs and get paired with a mentor who can transform your entrepreneurial journey.
-            </motion.p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Link to="/programs">
-                <Button variant="primary" size="lg" className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-gray-900">
-                  View Programs <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-white/10 hover:bg-white/20 text-white border-white/20"
-                >
-                  Contact Us
-                </Button>
-              </Link>
-            </motion.div>
           </div>
         </div>
       </section>

@@ -65,6 +65,10 @@ const programs = [
   },
 ];
 
+import programsHeroImg from '../assets/programs_hero.png';
+
+// ...existing code...
+
 const ProgramsPage: React.FC = () => {
   const detailRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -75,25 +79,17 @@ const ProgramsPage: React.FC = () => {
   return (
     <>
       <Hero
-        title="Our Programs"
-        subtitle="From exploration to execution to scaling — structured programs designed to build real entrepreneurs at every stage."
-        imageSrc="https://images.pexels.com/photos/3184396/pexels-photo-3184396.jpeg?auto=compress&cs=tinysrgb&w=1600"
-        primaryButtonText="Get Started"
-        primaryButtonLink="/contact"
+        heroTagline="Choose Your Entrepreneurial Journey"
+        subtitle="Turn your ideas into real startups through structured programs designed to make you a founder."
+        imageSrc={programsHeroImg}
         hideServicesButton
+        hideButtons
+        showScrollPrompt
       />
 
       {/* Programs Journey Section */}
       <section className="py-20 bg-gray-50">
         <div className="container-custom">
-          <SectionHeading
-            subtitle="Our Programs"
-            title="Choose Your Entrepreneurial Journey"
-            description="From exploration to execution to scaling — find your stage."
-            subtitleClassName="text-red-500 font-semibold text-3xl"
-            titleClassName="text-primary-700 text-3xl md:text-4xl font-bold mt-2 mb-6"
-          />
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programs.map((program, index) => (
               <ProgramCard
@@ -102,6 +98,7 @@ const ProgramsPage: React.FC = () => {
                 stageBadge={program.stageBadge}
                 stageColor={program.stageColor}
                 description={program.description}
+                icon={program.icon}
                 delay={index * 0.1}
                 onExplore={() => scrollToDetail(index)}
               />
@@ -172,7 +169,7 @@ const ProgramsPage: React.FC = () => {
                         variant="primary"
                         className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-gray-900"
                       >
-                        {program.title === 'Young Risers' ? 'Apply Now' : 'Get in Touch'}{' '}
+                        {program.title === 'Young Risers' ? 'Apply Now' : 'Notify Me'}{' '}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </Link>
@@ -183,13 +180,74 @@ const ProgramsPage: React.FC = () => {
                       whileHover={{ scale: 1.02 }}
                     >
                       <div
-                        className="aspect-[4/3] bg-gradient-to-br flex items-center justify-center"
+                        className="aspect-[4/3] flex items-center justify-center relative overflow-hidden"
                         style={{
                           background: `linear-gradient(135deg, ${program.stageColor}15 0%, ${program.stageColor}30 100%)`,
                         }}
                       >
+                        {/* SVG vector background decoration */}
+                        <svg
+                          className="absolute inset-0 w-full h-full"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          viewBox="0 0 480 360"
+                          preserveAspectRatio="xMidYMid slice"
+                        >
+                          {/* Large bg circles */}
+                          <circle cx="408" cy="54" r="130" fill={program.stageColor} fillOpacity="0.18" />
+                          <circle cx="48" cy="306" r="100" fill={program.stageColor} fillOpacity="0.15" />
+                          <circle cx="240" cy="180" r="200" fill={program.stageColor} fillOpacity="0.06" />
+                          {/* Ring outlines */}
+                          <circle cx="408" cy="54" r="160" fill="none" stroke={program.stageColor} strokeOpacity="0.20" strokeWidth="1.5" />
+                          <circle cx="408" cy="54" r="190" fill="none" stroke={program.stageColor} strokeOpacity="0.12" strokeWidth="1" />
+                          <circle cx="48" cy="306" r="135" fill="none" stroke={program.stageColor} strokeOpacity="0.18" strokeWidth="1.5" />
+                          {/* Dotted grid */}
+                          {Array.from({ length: 7 }).map((_, row) =>
+                            Array.from({ length: 9 }).map((_, col) => (
+                              <circle
+                                key={`dot-${row}-${col}`}
+                                cx={col * 60 + 30}
+                                cy={row * 60 + 30}
+                                r="2.5"
+                                fill={program.stageColor}
+                                fillOpacity="0.28"
+                              />
+                            ))
+                          )}
+                          {/* Diagonal accent lines */}
+                          <line x1="0" y1="360" x2="192" y2="0" stroke={program.stageColor} strokeOpacity="0.18" strokeWidth="1.5" />
+                          <line x1="288" y1="360" x2="480" y2="72" stroke={program.stageColor} strokeOpacity="0.18" strokeWidth="1.5" />
+                          <line x1="0" y1="200" x2="480" y2="160" stroke={program.stageColor} strokeOpacity="0.10" strokeWidth="1" strokeDasharray="6 8" />
+                          {/* Corner bracket — top-left */}
+                          <path d="M 28 28 L 28 72 M 28 28 L 72 28" stroke={program.stageColor} strokeOpacity="0.50" strokeWidth="3" strokeLinecap="round" fill="none" />
+                          {/* Corner bracket — bottom-right */}
+                          <path d="M 452 332 L 452 288 M 452 332 L 408 332" stroke={program.stageColor} strokeOpacity="0.50" strokeWidth="3" strokeLinecap="round" fill="none" />
+                          {/* Corner bracket — top-right (lighter) */}
+                          <path d="M 452 28 L 452 60 M 452 28 L 420 28" stroke={program.stageColor} strokeOpacity="0.30" strokeWidth="2" strokeLinecap="round" fill="none" />
+                          {/* Corner bracket — bottom-left (lighter) */}
+                          <path d="M 28 332 L 28 300 M 28 332 L 60 332" stroke={program.stageColor} strokeOpacity="0.30" strokeWidth="2" strokeLinecap="round" fill="none" />
+                          {/* Triangle accent — top-right */}
+                          <polygon points="440,36 468,86 412,86" fill={program.stageColor} fillOpacity="0.22" />
+                          {/* Diamond accent — mid-left */}
+                          <polygon points="38,162 58,144 78,162 58,180" fill={program.stageColor} fillOpacity="0.25" />
+                          {/* Square accent — bottom-right area */}
+                          <rect x="380" y="280" width="28" height="28" rx="4" fill={program.stageColor} fillOpacity="0.18" transform="rotate(15 394 294)" />
+                          {/* Cross/plus accent */}
+                          <line x1="420" y1="200" x2="420" y2="240" stroke={program.stageColor} strokeOpacity="0.30" strokeWidth="2.5" strokeLinecap="round" />
+                          <line x1="400" y1="220" x2="440" y2="220" stroke={program.stageColor} strokeOpacity="0.30" strokeWidth="2.5" strokeLinecap="round" />
+                          {/* Small circle cluster */}
+                          <circle cx="80" cy="80" r="6" fill={program.stageColor} fillOpacity="0.22" />
+                          <circle cx="100" cy="72" r="4" fill={program.stageColor} fillOpacity="0.16" />
+                          <circle cx="68" cy="96" r="3" fill={program.stageColor} fillOpacity="0.14" />
+                          {/* Dashed arc */}
+                          <path d="M 120 300 Q 240 200 360 300" fill="none" stroke={program.stageColor} strokeOpacity="0.20" strokeWidth="2" strokeDasharray="8 6" />
+                          {/* Horizontal rule near top */}
+                          <line x1="120" y1="24" x2="320" y2="24" stroke={program.stageColor} strokeOpacity="0.18" strokeWidth="1" strokeDasharray="4 6" />
+                        </svg>
+
+                        {/* Floating program icon */}
                         <motion.div
-                          className="w-24 h-24 rounded-3xl flex items-center justify-center shadow-lg"
+                          className="relative z-10 w-24 h-24 rounded-3xl flex items-center justify-center shadow-lg"
                           style={{ backgroundColor: 'white', color: program.stageColor }}
                           animate={{ y: [0, -8, 0] }}
                           transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -202,54 +260,6 @@ const ProgramsPage: React.FC = () => {
                 </motion.div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 bg-[#708090] text-white">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Ready to Start Your Entrepreneurial Journey?
-            </motion.h2>
-            <motion.p
-              className="text-lg text-gray-200 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Whether you're a student exploring ideas or a startup ready to scale — we have the right program for you.
-            </motion.p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Link to="/young-risers/enroll">
-                <Button variant="primary" size="lg" className="bg-[#74B72E] hover:bg-[#659A26] text-white">
-                  <Rocket className="mr-2 h-4 w-4" /> Apply to Young Risers
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-[#F9C800] text-gray-900 hover:bg-[#F9C800]/90 border-none"
-                >
-                  Contact Us
-                </Button>
-              </Link>
-            </motion.div>
           </div>
         </div>
       </section>

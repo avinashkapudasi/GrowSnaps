@@ -186,48 +186,6 @@ const PortfolioPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-primary-600 text-white">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Ready to Become Our Next Success Story?
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-primary-100 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Let's discuss how our strategic consulting can help you achieve your business goals and drive sustainable growth.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <a 
-                href="/contact"
-                className="bg-white hover:bg-gray-100 text-primary-600 font-medium py-3 px-8 rounded-md transition-colors inline-flex items-center justify-center"
-              >
-                Start Your Journey
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
     </>
   );
 };

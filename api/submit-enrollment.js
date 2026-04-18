@@ -1,11 +1,14 @@
 import Razorpay from 'razorpay';
 import { Resend } from 'resend';
 import {
-  getProgramFeeInPaise,
-  getProgramFeeInRupees,
   getRequiredEnv,
   buildPaymentLinkEmailHtml,
 } from './_lib/payment-utils.js';
+
+const ALLOWED_FEES = {
+  foundation: 12000,
+  pro: 25000,
+};
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -14,26 +17,34 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { studentName, age, email, phone, school, motivation } = req.body || {};
+    const { studentName, age, email, phone, school, motivation, courseType, courseName } = req.body || {};
 
     if (!studentName || !email || !phone || !age || !school) {
       res.status(400).json({ message: 'Please fill in all required fields.' });
       return;
     }
 
+    // Validate course type and fee server-side — never trust the client-supplied fee
+    const canonicalFee = ALLOWED_FEES[courseType];
+    if (!canonicalFee) {
+      res.status(400).json({ message: 'Invalid course selection. Please choose Foundation or Pro.' });
+      return;
+    }
+
+    const amountInPaise = Math.round(canonicalFee * 100);
+    const amountInRupees = canonicalFee;
+    const resolvedCourseName = courseName || (courseType === 'pro' ? 'Young Risers — Pro' : 'Young Risers — Foundation');
+
     const razorpay = new Razorpay({
       key_id: getRequiredEnv('RAZORPAY_KEY_ID'),
       key_secret: getRequiredEnv('RAZORPAY_KEY_SECRET'),
     });
 
-    const amountInPaise = getProgramFeeInPaise();
-    const amountInRupees = getProgramFeeInRupees();
-
     // Create a Razorpay Payment Link with form data stored in notes
     const paymentLink = await razorpay.paymentLink.create({
       amount: amountInPaise,
       currency: 'INR',
-      description: 'Young Risers Program Enrollment',
+      description: `Young Risers Program Enrollment — ${resolvedCourseName}`,
       customer: {
         name: studentName,
         email,
@@ -46,7 +57,8 @@ export default async function handler(req, res) {
         phone,
         school,
         motivation: String(motivation || '').slice(0, 250),
-        program: 'Young Risers',
+        program: resolvedCourseName,
+        courseType,
       },
       reminder_enable: true,
       callback_url: `${getRequiredEnv('APP_BASE_URL')}/young-risers/enroll?payment=success`,
@@ -57,14 +69,15 @@ export default async function handler(req, res) {
     const resend = new Resend(getRequiredEnv('RESEND_API_KEY'));
     const from = getRequiredEnv('PAYMENT_MAIL_FROM');
 
-    const { data: emailData, error: emailError } = await resend.emails.send({
+    const { error: emailError } = await resend.emails.send({
       from,
       to: [email],
-      subject: 'GrowSnaps Young Risers – Review Details & Complete Payment',
+      subject: `GrowSnaps Young Risers — Review Details & Complete Payment (${resolvedCourseName})`,
       html: buildPaymentLinkEmailHtml({
         formData: { studentName, age, email, phone, school, motivation },
         paymentLink: paymentLink.short_url,
         amountInRupees,
+        courseName: resolvedCourseName,
       }),
     });
 
@@ -80,18 +93,9 @@ export default async function handler(req, res) {
       message: `We've sent an email to ${email} with your enrollment details and a secure payment link. Please check your inbox to complete the payment.`,
     });
   } catch (error) {
-    console.error('Submit enrollment error:', JSON.stringify(error, null, 2));
-
-    let errMsg = 'Unable to process enrollment. Please try again.';
-    if (error instanceof Error) {
-      errMsg = error.message;
-    } else if (error?.error?.description) {
-      // Razorpay SDK error shape
-      errMsg = error.error.description;
-    } else if (typeof error === 'string') {
-      errMsg = error;
-    }
-
-    res.status(500).json({ message: errMsg });
+    console.error('Enrollment submission error:', error);
+    res.status(500).json({
+      message: error?.message || 'An unexpected error occurred. Please try again.',
+    });
   }
 }

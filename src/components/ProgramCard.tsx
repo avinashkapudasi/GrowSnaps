@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Target, Users, TrendingUp, Lightbulb, Zap, Award, LucideIcon } from 'lucide-react';
 
 interface ProgramCardProps {
   title: string;
@@ -9,7 +9,16 @@ interface ProgramCardProps {
   description?: string;
   delay?: number;
   onExplore?: () => void;
+  icon?: React.ReactNode;
 }
+
+type FeatureItem = { Icon: LucideIcon; label: string };
+
+const CARD_FEATURES: Record<string, FeatureItem[]> = {
+  'Young Risers':   [{ Icon: Lightbulb, label: 'Ideation' }, { Icon: Users,      label: 'Mentorship' }, { Icon: Award,      label: 'Demo Day' }],
+  'Venture Forge':  [{ Icon: Target,    label: 'Validate'  }, { Icon: Zap,        label: 'MVP Build'  }, { Icon: TrendingUp, label: 'Launch'   }],
+  'Venture Sprint': [{ Icon: TrendingUp,label: 'Growth'    }, { Icon: Zap,        label: 'Sprint'     }, { Icon: Target,     label: 'Scale'    }],
+};
 
 const ProgramCard: React.FC<ProgramCardProps> = ({
   title,
@@ -18,13 +27,13 @@ const ProgramCard: React.FC<ProgramCardProps> = ({
   description,
   delay = 0,
   onExplore,
+  icon,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const features = CARD_FEATURES[title] ?? [];
 
   const handleExplore = () => {
-    if (onExplore) {
-      onExplore();
-    }
+    if (onExplore) onExplore();
   };
 
   return (
@@ -51,6 +60,17 @@ const ProgramCard: React.FC<ProgramCardProps> = ({
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.4 }}
       />
+
+      {/* Large watermark icon — bottom-right background decoration */}
+      {icon && (
+        <div
+          className="absolute -bottom-3 -right-3 w-28 h-28 flex items-center justify-center opacity-[0.06] pointer-events-none select-none transition-opacity duration-300 group-hover:opacity-[0.10]"
+          style={{ color: stageColor }}
+          aria-hidden="true"
+        >
+          <div className="scale-[4]">{icon}</div>
+        </div>
+      )}
 
       {/* Floating particles on hover */}
       <AnimatePresence>
@@ -115,6 +135,28 @@ const ProgramCard: React.FC<ProgramCardProps> = ({
           >
             {description}
           </motion.p>
+        )}
+
+        {/* Feature icon strip */}
+        {features.length > 0 && (
+          <div className="flex items-center gap-3 mb-6">
+            {features.map(({ Icon, label }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center gap-1 flex-1"
+              >
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center transition-colors duration-300"
+                  style={{ backgroundColor: `${stageColor}15`, color: stageColor }}
+                >
+                  <Icon size={16} />
+                </div>
+                <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide leading-none">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
         )}
 
         {/* CTA Button */}

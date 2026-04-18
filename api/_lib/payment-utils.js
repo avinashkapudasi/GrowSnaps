@@ -57,14 +57,15 @@ export const verifyWebhookSignature = ({ body, signature, secret }) => {
 const esc = (str) => String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /** Email sent to user after form submission — contains details for review + payment link */
-export const buildPaymentLinkEmailHtml = ({ formData, paymentLink, amountInRupees }) => `
+export const buildPaymentLinkEmailHtml = ({ formData, paymentLink, amountInRupees, courseName }) => `
   <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1f2937; max-width: 600px;">
     <div style="background: linear-gradient(135deg, #74B72E 0%, #5a9622 100%); padding: 24px; border-radius: 12px 12px 0 0;">
       <h2 style="margin: 0; color: #fff;">Young Risers Enrollment</h2>
+      ${courseName ? `<p style="margin: 6px 0 0; color: #d1fae5; font-size: 14px;">${esc(courseName)}</p>` : ''}
     </div>
     <div style="padding: 24px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px;">
       <p>Hi ${esc(formData.studentName)},</p>
-      <p>Thank you for your interest in the <strong>GrowSnaps Young Risers</strong> program! Please review your details below and complete the payment to confirm your enrollment.</p>
+      <p>Thank you for your interest in the <strong>${courseName ? esc(courseName) : 'GrowSnaps Young Risers'}</strong> program! Please review your details below and complete the payment to confirm your enrollment.</p>
 
       <h3 style="margin-top: 24px; color: #1a2e05;">Your Details</h3>
       <table style="border-collapse: collapse; width: 100%; margin-top: 8px;">
@@ -74,6 +75,7 @@ export const buildPaymentLinkEmailHtml = ({ formData, paymentLink, amountInRupee
         <tr><td style="padding: 8px 12px; border: 1px solid #e5e7eb; background: #f9fafb;"><strong>Phone</strong></td><td style="padding: 8px 12px; border: 1px solid #e5e7eb;">${esc(formData.phone)}</td></tr>
         <tr><td style="padding: 8px 12px; border: 1px solid #e5e7eb; background: #f9fafb;"><strong>School</strong></td><td style="padding: 8px 12px; border: 1px solid #e5e7eb;">${esc(formData.school)}</td></tr>
         <tr><td style="padding: 8px 12px; border: 1px solid #e5e7eb; background: #f9fafb;"><strong>Why Join</strong></td><td style="padding: 8px 12px; border: 1px solid #e5e7eb;">${esc(formData.motivation) || '-'}</td></tr>
+        ${courseName ? `<tr><td style="padding: 8px 12px; border: 1px solid #e5e7eb; background: #f9fafb;"><strong>Selected Program</strong></td><td style="padding: 8px 12px; border: 1px solid #e5e7eb;">${esc(courseName)}</td></tr>` : ''}
         <tr><td style="padding: 8px 12px; border: 1px solid #e5e7eb; background: #f9fafb;"><strong>Program Fee</strong></td><td style="padding: 8px 12px; border: 1px solid #e5e7eb;"><strong>INR ${Number(amountInRupees).toLocaleString('en-IN')}</strong></td></tr>
       </table>
 

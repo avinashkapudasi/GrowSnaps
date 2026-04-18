@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from './Button';
 import { Link } from 'react-router-dom';
-import { Rocket, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Rocket, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 
 interface HeroSlide {
   title: React.ReactNode;
@@ -18,14 +18,18 @@ interface HeroSlide {
 }
 
 interface HeroProps {
-  title: string;
+  title?: string;
   subtitle: string;
+  eyebrow?: string;
+  heroTagline?: string;
   imageSrc?: string;
   primaryButtonText?: string;
   primaryButtonLink?: string;
   overlay?: boolean;
   hideServicesButton?: boolean;
   carousel?: boolean;
+  showScrollPrompt?: boolean;
+  hideButtons?: boolean;
 }
 
 const carouselSlides: HeroSlide[] = [
@@ -35,8 +39,8 @@ const carouselSlides: HeroSlide[] = [
       'GrowSnaps Global Ventures is an Entrepreneurial Ecosystem Enabler — empowering students, startups, and institutions to build, launch, and scale impactful ventures.',
     imageSrc:
       'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    primaryButtonText: 'View our Portfolio',
-    primaryButtonLink: '/portfolio',
+    primaryButtonText: 'Explore our Programs',
+    primaryButtonLink: '/programs',
     secondaryButtonText: 'Get in Touch',
     secondaryButtonLink: '/contact',
     variant: 'default',
@@ -113,8 +117,8 @@ const SlideContent: React.FC<{ slide: HeroSlide }> = ({ slide }) => (
 
     {/* Content */}
     <div className="relative z-10 min-h-screen flex items-center">
-      <div className="container-custom pt-20 pb-16 md:py-24 lg:pt-40 lg:pb-32">
-        <div className="max-w-3xl">
+      <div className="w-full px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:py-24 lg:pt-40 lg:pb-32">
+        <div className="max-w-3xl pl-4 sm:pl-8 lg:pl-16">
           {slide.badge && (
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -202,12 +206,16 @@ const SlideContent: React.FC<{ slide: HeroSlide }> = ({ slide }) => (
 const Hero: React.FC<HeroProps> = ({
   title,
   subtitle,
+  eyebrow,
+  heroTagline,
   imageSrc = 'https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1600',
   primaryButtonText = 'Get in Touch with us',
   primaryButtonLink = '/contact',
   overlay = true,
   hideServicesButton = false,
   carousel = false,
+  showScrollPrompt = false,
+  hideButtons = false,
 }) => {
   const [[current, direction], setCurrent] = useState([0, 0]);
   const [isPaused, setIsPaused] = useState(false);
@@ -322,11 +330,23 @@ const Hero: React.FC<HeroProps> = ({
           <span className="mx-1">/</span>
           <span>{String(carouselSlides.length).padStart(2, '0')}</span>
         </div>
+
+        {/* Scroll prompt - Carousel */}
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-20 z-30 flex flex-col items-center gap-2">
+          <motion.div
+            animate={{ y: [0, -18, 0] }}
+            transition={{ duration: 0.7, repeat: Infinity, ease: 'easeOut', repeatType: 'loop' }}
+            className="w-12 h-12 rounded-full bg-[#74B72E] shadow-lg shadow-[#74B72E]/50 flex items-center justify-center"
+          >
+            <ChevronDown size={24} className="text-white" strokeWidth={3} />
+          </motion.div>
+          <span className="text-white text-xs font-bold tracking-widest uppercase">Scroll down to explore</span>
+        </div>
       </section>
     );
   }
 
-  // ─── Standard single-slide mode (for Services, etc.) ───
+  // ─── Standard single-slide mode (for Services, Programs, etc.) ───
   return (
     <section
       className="relative min-h-screen bg-cover bg-center flex items-center"
@@ -336,55 +356,106 @@ const Hero: React.FC<HeroProps> = ({
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/80 to-gray-900/60" />
       )}
 
-      <div className="container-custom relative z-10 pt-20 pb-16 md:py-24 lg:pt-40 lg:pb-32">
-        <div className="max-w-3xl">
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            {title}
-          </motion.h1>
+      <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10 pt-20 pb-16 md:py-24 lg:pt-40 lg:pb-32">
+        {/* Content pinned to the left — no mx-auto so max-w-3xl hugs the left */}
+        <div className="max-w-3xl text-left pl-4 sm:pl-8 lg:pl-16">
+
+          {/* Eyebrow label */}
+          {eyebrow && (
+            <motion.span
+              className="inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full bg-[#74B72E]/20 text-[#74B72E] border border-[#74B72E]/30 mb-5"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {eyebrow}
+            </motion.span>
+          )}
+
+          {title && (
+            <motion.h1
+              className="text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: eyebrow ? 0.1 : 0 }}
+            >
+              {title}
+            </motion.h1>
+          )}
+
+          {/* Hero tagline — larger, bolder line sitting between h1 and subtitle */}
+          {heroTagline && (
+            <motion.h2
+              className="text-3xl md:text-4xl lg:text-5xl text-white font-bold mb-5 leading-tight"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              {heroTagline}
+            </motion.h2>
+          )}
 
           <motion.p
-            className="text-lg md:text-xl text-gray-200 mb-8 md:mb-10 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-          >
-            {subtitle}
-          </motion.p>
-
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4"
+            className="text-lg md:text-xl text-gray-300 mb-8 md:mb-10 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <Link to={primaryButtonLink}>
-              <Button
-                variant="primary"
-                size="lg"
-                className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-white"
-              >
-                {primaryButtonText}
-              </Button>
-            </Link>
-            {!hideServicesButton && (
-              <Link to="/services">
+            {subtitle}
+          </motion.p>
+
+          {!hideButtons && (
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              <Link to={primaryButtonLink}>
                 <Button
-                  variant="secondary"
+                  variant="primary"
                   size="lg"
-                  className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
+                  className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-white"
                 >
-                  Explore Our Services
+                  {primaryButtonText}
                 </Button>
               </Link>
-            )}
-          </motion.div>
+              {!hideServicesButton && (
+                <Link to="/services">
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333]"
+                  >
+                    Explore Our Services
+                  </Button>
+                </Link>
+              )}
+            </motion.div>
+          )}
         </div>
       </div>
+
+      {/* Scroll prompt — absolutely centered at the bottom, same as carousel */}
+      {showScrollPrompt && (
+        <motion.div
+          className="absolute left-1/2 -translate-x-1/2 bottom-10 z-20 flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <motion.div
+            animate={{ y: [0, -18, 0] }}
+            transition={{ duration: 0.7, repeat: Infinity, ease: 'easeOut', repeatType: 'loop' }}
+            className="w-12 h-12 rounded-full bg-[#74B72E] shadow-lg shadow-[#74B72E]/50 flex items-center justify-center"
+          >
+            <ChevronDown size={24} className="text-white" strokeWidth={3} />
+          </motion.div>
+          <span className="text-white text-xs font-bold tracking-widest uppercase">
+            Scroll down to explore
+          </span>
+        </motion.div>
+      )}
     </section>
   );
 };

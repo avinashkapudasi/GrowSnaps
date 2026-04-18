@@ -44,16 +44,14 @@ const HomePage: React.FC = () => {
               viewport={{ once: true, margin: "-100px" }}
             >
                 <span className="text-red-500 font-semibold text-3xl">About GrowSnaps</span>
-              <h2 className="text-primary-700 text-3xl md:text-4xl font-bold mt-2 mb-6">Your Partner in Strategy, Startup Success, and Innovation Culture.</h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-              GrowSnaps Global Ventures is a strategy and innovation consulting firm that partners with educational institutions, startups, and established businesses to unlock growth and drive meaningful impact.
+              <p className="text-gray-600 mb-6 leading-relaxed mt-4">
+                GrowSnaps Global Ventures is an elite strategy and innovation consulting firm dedicated to architecting the next generation of market-leading ventures by bridging the gap between academic brilliance and commercial excellence.
               </p>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                For startups and enterprises, we offer end-to-end consulting across product strategy, brand positioning, go-to-market planning, and business scaling. Whether you're validating an idea, launching a product, or repositioning for growth, our hands-on, outcome-driven approach ensures clarity, speed, and sustainability.
+                We drive impact through a sophisticated, multi-tiered ecosystem: <strong>Young Risers</strong> cultivates a creator mindset in students through a 5-phase experiential journey (Grow → Lead) focused on real-world problem discovery and AI-driven prototyping; <strong>Venture Forge</strong> provides a hands-on, 6-phase framework (Discover → Launch) that transforms raw ideas into structured, market-ready businesses through rigorous validation and iterative product thinking; and <strong>Venture Sprint</strong> offers a high-intensity acceleration path for early-stage startups to eliminate market uncertainty, master unit economics, and achieve definitive product-market fit.
               </p>
               <p className="text-gray-600 mb-8 leading-relaxed">
-               We help institutions build robust, NEP-aligned innovation ecosystems that inspire entrepreneurship and foster intrapreneurship among students. Through structured programs, we guide student innovators from problem discovery to venture creation — turning campuses into launchpads for real-world impact.
-
+                By integrating end-to-end consulting with structured innovation programs, GrowSnaps transforms campuses into launchpads and startups into scalable enterprises — ensuring every innovation is backed by strategic clarity, operational speed, and long-term sustainability.
               </p>
               
             </motion.div>
@@ -120,48 +118,6 @@ const HomePage: React.FC = () => {
                 View All Services
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-[#708090] text-white">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Ready to Transform Your Business?
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-primary-100 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Let's discuss how our strategic consulting can help you achieve sustainable growth and competitive advantage in your market.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Link to="/contact">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="bg-[#F9C800] text-[#333333] hover:bg-[#F9C800] hover:text-[#333333] border-[#F9C800]"
-                >
-                  Schedule a Consultation
-                </Button>
-              </Link>
-            </motion.div>
           </div>
         </div>
       </section>

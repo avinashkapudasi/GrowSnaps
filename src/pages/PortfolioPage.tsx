@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
 import TestimonialCard from '../components/TestimonialCard';
 import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
 
 const PortfolioPage: React.FC = () => {
   const [visibleTestimonials, setVisibleTestimonials] = useState(3);
@@ -247,48 +245,6 @@ const PortfolioPage: React.FC = () => {
                 <p className="text-gray-600">Institutional Collaborations</p>
               </motion.div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-primary-600 text-white">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Ready to Become Our Next Success Story?
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-primary-100 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Let's discuss how our strategic consulting can help you achieve your business goals and drive sustainable growth.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Link to="/contact">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="bg-[#F9C800] text-[#333333] hover:bg-[#F9C800] hover:text-[#333333] border-[#F9C800]"
-                >
-                  Start your journey 
-                </Button>
-              </Link>
-            </motion.div>
           </div>
         </div>
       </section>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Lightbulb, Users, ClipboardCheck } from 'lucide-react';
 
 import Hero from '../components/Hero';
@@ -148,7 +147,7 @@ const ServicesPage: React.FC = () => {
             title="We Grow What's Next — Startups, Strategies and Ecosystems."
             description="We offer a wide range of strategic consulting services designed to help businesses at every stage of their growth journey."
             titleClassName="text-primary-700 font-semibold text-3xl"
-            
+            alignment="left"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -175,47 +174,6 @@ const ServicesPage: React.FC = () => {
               </Button>
             </div>
           )}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-[#708090] text-white">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Ready to Accelerate Your Growth?
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-primary-100 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Schedule a consultation with our team to discuss your business goals and how we can help you achieve them with our strategic consulting services.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Link to="/contact">                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="bg-[#F9C800] hover:bg-[#F9C800]/90 text-[#333333] border-none"
-                >
-                  Contact Us Today
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
         </div>
       </section>
     </>
