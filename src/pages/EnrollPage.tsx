@@ -18,7 +18,7 @@ const COURSE_OPTIONS: CourseOption[] = [
   {
     id: 'foundation',
     name: 'Young Risers — Foundation',
-    fee: 12000,
+    fee: 1,
     tagline: 'Kickstart your entrepreneurial journey',
     highlights: [
       '5-phase structured curriculum',
