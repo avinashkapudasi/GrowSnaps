@@ -71,7 +71,7 @@ const INITIAL_FORM: EnrollmentFormData = {
   motivation: '',
 };
 
-const SUPPORT_EMAIL = 'info@growsnaps.com';
+const SUPPORT_EMAIL = 'growsnapsglobalventures@growsnaps.com';
 const SUPPORT_PHONE = '+91 9030457668';
 
 /* ── Success Popup Modal ── */

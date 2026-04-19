@@ -74,8 +74,8 @@ export default async function handler(req, res) {
     const formData = {
       studentName: notes.studentName || 'N/A',
       age: notes.age || 'N/A',
-      email: notes.email || '',
-      phone: notes.phone || 'N/A',
+      email: notes.studentEmail || notes.email || '',
+      phone: notes.studentPhone || notes.phone || 'N/A',
       school: notes.school || 'N/A',
       motivation: notes.motivation || '',
     };

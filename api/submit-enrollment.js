@@ -53,8 +53,8 @@ export default async function handler(req, res) {
       notes: {
         studentName,
         age: String(age),
-        email,
-        phone,
+        studentEmail: email,
+        studentPhone: phone,
         school,
         motivation: String(motivation || '').slice(0, 250),
         program: resolvedCourseName,

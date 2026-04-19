@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-export const SUPPORT_EMAIL = 'info@growsnaps.com';
+export const SUPPORT_EMAIL = 'growsnapsglobalventures@growsnaps.com';
 export const SUPPORT_PHONE = '+91 9030457668';
 
 export const getRequiredEnv = (name) => {
