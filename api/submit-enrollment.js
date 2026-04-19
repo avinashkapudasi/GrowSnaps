@@ -6,7 +6,7 @@ import {
 } from './_lib/payment-utils.js';
 
 const ALLOWED_FEES = {
-  foundation: 1,
+  foundation: 12000,
   pro: 25000,
 };
 

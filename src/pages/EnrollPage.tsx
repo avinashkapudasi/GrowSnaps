@@ -18,7 +18,7 @@ const COURSE_OPTIONS: CourseOption[] = [
   {
     id: 'foundation',
     name: 'Young Risers — Foundation',
-    fee: 1,
+    fee: 12000,
     tagline: 'Kickstart your entrepreneurial journey',
     highlights: [
       '5-phase structured curriculum',
@@ -289,9 +289,12 @@ const EnrollPage: React.FC = () => {
                       ))}
                     </ul>
                     <div className="flex items-center justify-between">
-                      <span className="text-2xl font-extrabold text-[#74B72E]">
-                        ₹{course.fee.toLocaleString('en-IN')}
-                      </span>
+                      <div>
+                        <span className="text-2xl font-extrabold text-[#74B72E]">
+                          ₹{course.fee.toLocaleString('en-IN')}
+                        </span>
+                        <p className="text-[10px] text-gray-400">* Inclusive of all taxes</p>
+                      </div>
                       <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#74B72E] text-white text-xs font-semibold">
                         Select <Zap className="h-3 w-3" />
                       </span>
@@ -418,6 +421,7 @@ const EnrollPage: React.FC = () => {
                         <p className="text-2xl font-extrabold text-[#74B72E]">
                           ₹{selectedCourse.fee.toLocaleString('en-IN')}
                         </p>
+                        <p className="text-[10px] text-gray-400 mt-0.5">* Inclusive of all taxes</p>
                       </div>
                     </div>
 

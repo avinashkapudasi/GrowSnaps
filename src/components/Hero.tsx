@@ -330,8 +330,8 @@ const Hero: React.FC<HeroProps> = ({
           <span>{String(carouselSlides.length).padStart(2, '0')}</span>
         </div>
 
-        {/* Scroll prompt - Carousel: right side on desktop, below content on mobile */}
-        <div className="absolute z-30 bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 md:top-1/2 md:-translate-y-1/2 md:bottom-auto flex flex-col items-center gap-2">
+        {/* Scroll prompt - Carousel: bottom-right corner on desktop, bottom-center on mobile */}
+        <div className="absolute z-30 bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-8 md:bottom-8 flex flex-col items-center gap-2">
           <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 0.7, repeat: Infinity, ease: 'easeOut', repeatType: 'loop' }}
@@ -438,7 +438,7 @@ const Hero: React.FC<HeroProps> = ({
       {/* Scroll prompt: right side on desktop, below content on mobile */}
       {showScrollPrompt && (
         <motion.div
-          className="absolute z-20 bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 md:top-1/2 md:-translate-y-1/2 md:bottom-auto flex flex-col items-center gap-2"
+          className="absolute z-20 bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-8 md:bottom-8 flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}

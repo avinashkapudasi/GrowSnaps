@@ -65,6 +65,7 @@ const ServicesPage: React.FC = () => {
         subtitle="Our strategic consulting services are designed to help you navigate every stage of your business journey, from ideation to scaling for sustainable growth."
         imageSrc="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1600"
         hideServicesButton={true}
+        showScrollPrompt
       />
 
       {/* Our Approach */}
