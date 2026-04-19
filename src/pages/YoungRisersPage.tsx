@@ -67,7 +67,7 @@ const YoungRisersPage: React.FC = () => {
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#74B72E] rounded-full blur-3xl" />
           <div className="absolute bottom-10 right-20 w-96 h-96 bg-yellow-400 rounded-full blur-3xl" />
         </div>
-        <div className="container-custom relative z-10 pt-28 pb-16">
+        <div className="container-custom relative z-10 pt-24 pb-16">
           <div className="max-w-3xl">
             <motion.div {...fadeUp} className="flex items-center gap-2 mb-4">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#74B72E]/20 text-[#74B72E] text-xs font-semibold uppercase tracking-wider border border-[#74B72E]/30">

@@ -10,7 +10,7 @@ const ContactPage: React.FC = () => {
   return (
     <>
       {/* Elegant Page Header */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-36 pb-12 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-28 pb-12 overflow-hidden">
         {/* Subtle decorative elements */}
         <div className="absolute inset-0 opacity-[0.03]">
           <div

@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Linkedin, Twitter } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Linkedin, Twitter, X } from 'lucide-react';
 
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
@@ -19,10 +19,10 @@ interface Mentor {
 
 const mentors: Mentor[] = [
   {
-    name: 'Rajesh Sharma',
+    name: 'Hari Goutham',
     role: 'Startup Strategy Mentor',
     expertise: ['Business Strategy', 'Go-to-Market', 'Fundraising'],
-    bio: 'With 15+ years of experience in startup ecosystems, Rajesh has mentored over 100 startups from ideation to scale. He specializes in business model innovation and investor readiness.',
+    bio: 'With 5+ years of experience in startup ecosystems, Hari has mentored over 100 startups from ideation to scale. He specializes in business model innovation and investor readiness.',
     image: new URL('../assets/Hari.jpeg', import.meta.url).href,
     program: 'Venture Sprint',
     programColor: '#10B981',
@@ -40,7 +40,7 @@ const mentors: Mentor[] = [
   },
 ];
 
-const MentorCard: React.FC<{ mentor: Mentor; index: number }> = ({ mentor, index }) => {
+const MentorCard: React.FC<{ mentor: Mentor; index: number; onClick: () => void }> = ({ mentor, index, onClick }) => {
   return (
     <motion.div
       className="relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg"
@@ -56,6 +56,7 @@ const MentorCard: React.FC<{ mentor: Mentor; index: number }> = ({ mentor, index
         boxShadow: '0 30px 60px -15px rgba(0, 0, 0, 0.25)',
       }}
       style={{ perspective: 900, transformStyle: 'preserve-3d' }}
+      onClick={onClick}
     >
       {/* Full-size photo — always visible */}
       <div className="relative h-[420px] overflow-hidden">
@@ -72,56 +73,28 @@ const MentorCard: React.FC<{ mentor: Mentor; index: number }> = ({ mentor, index
           <p className="text-sm text-[#F9C800] font-semibold">{mentor.role}</p>
         </div>
 
-        {/* Hover overlay: full details revealed */}
+        {/* Hover overlay: preview (no program badge) */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
-          <motion.div
-            className="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500"
-          >
-            {/* Program badge */}
-            <span
-              className="inline-block text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full text-white mb-3"
-              style={{ backgroundColor: mentor.programColor }}
-            >
-              {mentor.program}
-            </span>
-
+          <motion.div className="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
             <h3 className="text-xl font-bold text-white mb-1">{mentor.name}</h3>
             <p className="text-sm text-[#F9C800] font-semibold mb-3">{mentor.role}</p>
             <p className="text-sm text-gray-200 leading-relaxed mb-4 line-clamp-3">{mentor.bio}</p>
 
             {/* Expertise tags */}
             <div className="flex flex-wrap gap-1.5 mb-4">
-              {mentor.expertise.map((skill) => (
-                <span
-                  key={skill}
-                  className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-white/15 text-white backdrop-blur-sm"
-                >
+              {mentor.expertise.slice(0, 3).map((skill) => (
+                <span key={skill} className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-white/15 text-white backdrop-blur-sm">
                   {skill}
                 </span>
               ))}
+              {mentor.expertise.length > 3 && (
+                <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-white/15 text-white backdrop-blur-sm">
+                  +{mentor.expertise.length - 3} more
+                </span>
+              )}
             </div>
 
-            {/* Social links */}
-            <div className="flex items-center gap-3 pt-3 border-t border-white/20">
-              {mentor.linkedin && (
-                <a
-                  href={mentor.linkedin}
-                  className="text-white/60 hover:text-white transition-colors"
-                  aria-label={`${mentor.name} LinkedIn`}
-                >
-                  <Linkedin size={18} />
-                </a>
-              )}
-              {mentor.twitter && (
-                <a
-                  href={mentor.twitter}
-                  className="text-white/60 hover:text-white transition-colors"
-                  aria-label={`${mentor.name} Twitter`}
-                >
-                  <Twitter size={18} />
-                </a>
-              )}
-            </div>
+            <p className="text-xs text-white/60 font-medium tracking-wide">Click to view full profile →</p>
           </motion.div>
         </div>
       </div>
@@ -129,15 +102,103 @@ const MentorCard: React.FC<{ mentor: Mentor; index: number }> = ({ mentor, index
   );
 };
 
+/* ── Mentor Detail Modal ── */
+const MentorModal: React.FC<{ mentor: Mentor | null; onClose: () => void }> = ({ mentor, onClose }) => (
+  <AnimatePresence>
+    {mentor && (
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        {/* Backdrop */}
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+
+        {/* Panel */}
+        <motion.div
+          className="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden z-10 max-h-[90vh] flex flex-col"
+          initial={{ scale: 0.92, y: 24, opacity: 0 }}
+          animate={{ scale: 1, y: 0, opacity: 1 }}
+          exit={{ scale: 0.92, y: 24, opacity: 0 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header image strip */}
+          <div className="relative h-56 flex-shrink-0 overflow-hidden">
+            <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover object-top" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors"
+              aria-label="Close"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <div className="absolute bottom-5 left-6">
+              <h2 className="text-2xl font-bold text-white">{mentor.name}</h2>
+              <p className="text-sm text-[#F9C800] font-semibold">{mentor.role}</p>
+            </div>
+          </div>
+
+          {/* Body */}
+          <div className="overflow-y-auto p-6 space-y-5">
+            {/* Bio */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">About</h4>
+              <p className="text-gray-700 text-sm leading-relaxed">{mentor.bio}</p>
+            </div>
+
+            {/* Expertise */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Expertise</h4>
+              <div className="flex flex-wrap gap-2">
+                {mentor.expertise.map((skill) => (
+                  <span
+                    key={skill}
+                    className="text-xs font-medium px-3 py-1 rounded-full border"
+                    style={{ color: mentor.programColor, borderColor: `${mentor.programColor}40`, backgroundColor: `${mentor.programColor}10` }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Social */}
+            {(mentor.linkedin || mentor.twitter) && (
+              <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                {mentor.linkedin && (
+                  <a href={mentor.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#0A66C2] transition-colors">
+                    <Linkedin className="h-4 w-4" /> LinkedIn
+                  </a>
+                )}
+                {mentor.twitter && (
+                  <a href={mentor.twitter} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#1DA1F2] transition-colors">
+                    <Twitter className="h-4 w-4" /> Twitter
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
+
 const MentorsPage: React.FC = () => {
+  const [activeMentor, setActiveMentor] = useState<Mentor | null>(null);
+
   return (
     <>
       <Hero
         title="Meet Our Mentors"
         subtitle="Industry leaders, seasoned entrepreneurs, and domain experts who guide our participants at every step of their entrepreneurial journey."
         imageSrc="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1600"
-        primaryButtonText="Explore Programs"
-        primaryButtonLink="/programs"
+        primaryButtonText="Join Us"
+        primaryButtonLink="/contact?program=Mentorship"
         hideServicesButton
       />
 
@@ -154,7 +215,7 @@ const MentorsPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {mentors.map((mentor, index) => (
-              <MentorCard key={mentor.name} mentor={mentor} index={index} />
+              <MentorCard key={mentor.name} mentor={mentor} index={index} onClick={() => setActiveMentor(mentor)} />
             ))}
           </div>
         </div>
@@ -175,20 +236,17 @@ const MentorsPage: React.FC = () => {
             {[
               {
                 title: 'Stage-Matched',
-                description:
-                  'Each mentor is aligned to a specific program stage — early, build, or growth — so the guidance is always relevant.',
+                description: 'Each mentor is aligned to a specific program stage — early, build, or growth — so the guidance is always relevant.',
                 color: '#3B82F6',
               },
               {
                 title: 'Hands-On Approach',
-                description:
-                  'Our mentors don\'t just advise — they roll up their sleeves and work alongside you to solve real problems.',
+                description: "Our mentors don't just advise — they roll up their sleeves and work alongside you to solve real problems.",
                 color: '#F97316',
               },
               {
                 title: 'Industry Network',
-                description:
-                  'Get access to our mentors\' vast network of investors, partners, and industry contacts to accelerate your growth.',
+                description: "Get access to our mentors' vast network of investors, partners, and industry contacts to accelerate your growth.",
                 color: '#10B981',
               },
             ].map((item, index) => (
@@ -201,10 +259,7 @@ const MentorsPage: React.FC = () => {
                 className="text-center p-6 rounded-2xl bg-gray-50 border border-gray-100"
                 whileHover={{ y: -5, scale: 1.02 }}
               >
-                <div
-                  className="w-12 h-12 rounded-xl mx-auto mb-4 flex items-center justify-center text-lg font-bold text-white"
-                  style={{ backgroundColor: item.color }}
-                >
+                <div className="w-12 h-12 rounded-xl mx-auto mb-4 flex items-center justify-center text-lg font-bold text-white" style={{ backgroundColor: item.color }}>
                   {index + 1}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
@@ -214,6 +269,9 @@ const MentorsPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Mentor detail modal */}
+      <MentorModal mentor={activeMentor} onClose={() => setActiveMentor(null)} />
     </>
   );
 };

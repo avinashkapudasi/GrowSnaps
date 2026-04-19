@@ -42,7 +42,7 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         useDarkNav
           ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/[0.03] py-2'
-          : 'bg-transparent py-4'
+          : 'bg-transparent py-3'
       }`}
     >
       <div className="container-custom">
@@ -52,7 +52,7 @@ const Navbar = () => {
             <motion.img
               src={logo}
               alt="GrowSnaps Logo"
-              className="h-24 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg"
+              className="h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg"
               whileTap={{ scale: 0.95 }}
             />
           </Link>

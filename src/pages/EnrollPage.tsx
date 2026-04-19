@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Rocket, ArrowLeft, CheckCircle2, AlertCircle, Loader2, Mail, Star, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Rocket, ArrowLeft, CheckCircle2, AlertCircle, Loader2, Mail, Star, Zap, X } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 type CourseOption = {
@@ -74,6 +74,64 @@ const INITIAL_FORM: EnrollmentFormData = {
 const SUPPORT_EMAIL = 'info@growsnaps.com';
 const SUPPORT_PHONE = '+91 9030457668';
 
+/* ── Success Popup Modal ── */
+const SuccessModal: React.FC<{ email: string; onClose: () => void }> = ({ email, onClose }) => (
+  <AnimatePresence>
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+      <motion.div
+        className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 z-10 text-center"
+        initial={{ scale: 0.88, y: 28, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.88, y: 28, opacity: 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 transition-colors"
+          aria-label="Close"
+        >
+          <X className="h-4 w-4" />
+        </button>
+
+        {/* Icon */}
+        <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
+          <CheckCircle2 className="h-8 w-8 text-green-600" />
+        </div>
+
+        <h2 className="text-2xl font-bold text-gray-900 mb-3">You're all set! 🎉</h2>
+
+        <p className="text-gray-600 leading-relaxed mb-2">
+          We've sent an email to{' '}
+          <span className="font-semibold text-gray-900">{email}</span>{' '}
+          with your enrollment details and a secure payment link. Please check your inbox to complete the payment.
+        </p>
+
+        <p className="text-sm text-gray-500 leading-relaxed mt-4 pt-4 border-t border-gray-100">
+          Didn't get the email? Check your spam folder or contact{' '}
+          <a href={`mailto:${SUPPORT_EMAIL}`} className="text-[#74B72E] font-semibold hover:underline">
+            {SUPPORT_EMAIL}
+          </a>
+        </p>
+
+        <button
+          onClick={onClose}
+          className="mt-6 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#74B72E] hover:bg-[#659A26] text-white font-semibold text-sm transition-all shadow-md shadow-[#74B72E]/20"
+        >
+          Got it
+        </button>
+      </motion.div>
+    </motion.div>
+  </AnimatePresence>
+);
+
 const EnrollPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const paymentCallback = searchParams.get('payment');
@@ -138,7 +196,7 @@ const EnrollPage: React.FC = () => {
   // If user returned from Razorpay after successful payment
   if (paymentCallback === 'success') {
     return (
-      <div className="min-h-screen bg-gray-50 pt-28 pb-20">
+      <div className="min-h-screen bg-gray-50 pt-24 pb-20">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -174,23 +232,24 @@ const EnrollPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-28 pb-20">
-      <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-2xl mx-auto"
-        >
-          <Link
-            to="/young-risers"
-            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#74B72E] text-sm font-medium mb-8 transition-colors"
+    <>
+      <div className="min-h-screen bg-gray-50 pt-24 pb-20">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className={selectedCourse ? 'max-w-5xl mx-auto' : 'max-w-2xl mx-auto'}
           >
-            <ArrowLeft className="h-4 w-4" /> Back to Young Risers
-          </Link>
+            <Link
+              to="/young-risers"
+              className="inline-flex items-center gap-2 text-gray-500 hover:text-[#74B72E] text-sm font-medium mb-8 transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4" /> Back to Young Risers
+            </Link>
 
-          {/* Step 1: Course Selection */}
-          {!selectedCourse ? (
+            {/* Step 1: Course Selection */}
+            {!selectedCourse ? (
             <div>
               <div className="text-center mb-8">
                 <div className="w-14 h-14 rounded-2xl bg-[#74B72E]/10 flex items-center justify-center mx-auto mb-4">
@@ -250,102 +309,154 @@ const EnrollPage: React.FC = () => {
               </p>
             </div>
           ) : (
-            /* Step 2: Enrollment Form */
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-10">
-              {/* Selected course banner */}
-              <div className="flex items-center gap-3 mb-7 pb-6 border-b border-gray-100">
-                <div className="w-10 h-10 rounded-xl bg-[#74B72E]/10 text-[#74B72E] flex items-center justify-center flex-shrink-0">
-                  {selectedCourse.icon}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-0.5">Selected Program</p>
-                  <p className="font-bold text-gray-900 truncate">{selectedCourse.name}</p>
-                </div>
-                <div className="text-right flex-shrink-0">
-                  <p className="text-xl font-extrabold text-[#74B72E]">₹{selectedCourse.fee.toLocaleString('en-IN')}</p>
-                </div>
-                <button
-                  onClick={() => { setSelectedCourse(null); setStatus({ type: 'idle', message: '' }); }}
-                  className="ml-2 text-xs text-gray-400 hover:text-[#74B72E] underline underline-offset-2 transition-colors flex-shrink-0"
-                >
-                  Change
-                </button>
-              </div>
+            /* Step 2: Two-column layout — form left, sticky program card right */
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
 
-              <div className="text-center mb-8">
-                <h1 className="text-2xl font-bold text-gray-900 mb-1">Apply to Young Risers</h1>
-                <p className="text-gray-500 text-sm max-w-md mx-auto">
-                  Fill in your details and we'll send you a secure payment link to complete your enrollment.
-                </p>
-              </div>
-
-              <div className="rounded-2xl bg-[#74B72E]/5 border border-[#74B72E]/10 px-5 py-4 mb-6">
-                <p className="text-sm font-semibold text-gray-900 mb-0.5">How it works</p>
-                <p className="text-sm text-gray-600">Submit the form → Check your email → Complete payment via the secure Razorpay link.</p>
-              </div>
-
-              <form className="space-y-5" onSubmit={handleSubmit}>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Student Name</label>
-                    <input name="studentName" value={formData.studentName} onChange={handleChange} type="text" required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="Full name" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Age</label>
-                    <input name="age" value={formData.age} onChange={handleChange} type="number" min={13} max={19} required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="13–19" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
-                  <input name="email" value={formData.email} onChange={handleChange} type="email" required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="student@example.com" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone Number</label>
-                  <input name="phone" value={formData.phone} onChange={handleChange} type="tel" required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="+91 XXXXX XXXXX" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">School / Institution</label>
-                  <input name="school" value={formData.school} onChange={handleChange} type="text" required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="Your school or college name" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Why do you want to join?</label>
-                  <textarea name="motivation" value={formData.motivation} onChange={handleChange} rows={4} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm resize-none" placeholder="Tell us about yourself and why you're interested..." />
+              {/* ── Left: Enrollment Form ── */}
+              <div className="flex-1 bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-10">
+                <div className="text-center mb-8">
+                  <h1 className="text-2xl font-bold text-gray-900 mb-1">Apply to Young Risers</h1>
+                  <p className="text-gray-500 text-sm max-w-md mx-auto">
+                    Fill in your details and we'll send you a secure payment link to complete your enrollment.
+                  </p>
                 </div>
 
-                {status.type !== 'idle' && (
-                  <div className={`rounded-2xl border px-4 py-3 text-sm ${status.type === 'success' ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800'}`}>
-                    <div className="flex items-start gap-3">
-                      {status.type === 'success' ? <CheckCircle2 className="h-5 w-5 mt-0.5 flex-shrink-0" /> : <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />}
-                      <div>
-                        <p className="font-medium">{status.message}</p>
-                        {status.type === 'success' && (
-                          <p className="mt-1 text-sm text-green-700">
-                            Didn&apos;t get the email? Check your spam folder or contact {SUPPORT_EMAIL}.
-                          </p>
-                        )}
-                      </div>
+                <div className="rounded-2xl bg-[#74B72E]/5 border border-[#74B72E]/10 px-5 py-4 mb-6">
+                  <p className="text-sm font-semibold text-gray-900 mb-0.5">How it works</p>
+                  <p className="text-sm text-gray-600">Submit the form → Check your email → Complete payment via the secure Razorpay link.</p>
+                </div>
+
+                <form id="enroll-form" className="space-y-5" onSubmit={handleSubmit}>
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1.5">Student Name</label>
+                      <input name="studentName" value={formData.studentName} onChange={handleChange} type="text" required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="Full name" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1.5">Age</label>
+                      <input name="age" value={formData.age} onChange={handleChange} type="number" min={13} max={19} required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="13–19" />
                     </div>
                   </div>
-                )}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
+                    <input name="email" value={formData.email} onChange={handleChange} type="email" required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="student@example.com" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone Number</label>
+                    <input name="phone" value={formData.phone} onChange={handleChange} type="tel" required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="+91 XXXXX XXXXX" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">School / Institution</label>
+                    <input name="school" value={formData.school} onChange={handleChange} type="text" required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm" placeholder="Your school or college name" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Why do you want to join?</label>
+                    <textarea name="motivation" value={formData.motivation} onChange={handleChange} rows={4} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#74B72E] focus:ring-2 focus:ring-[#74B72E]/20 outline-none transition-all text-sm resize-none" placeholder="Tell us about yourself and why you're interested..." />
+                  </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#74B72E] hover:bg-[#659A26] disabled:bg-[#74B72E]/70 text-white font-semibold transition-all shadow-md shadow-[#74B72E]/20 hover:shadow-lg disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Mail className="h-4 w-4" />}
-                  {isSubmitting ? 'Submitting...' : 'Submit & Get Payment Link'}
-                </button>
+                  {/* Error inline only — success shown as popup */}
+                  {status.type === 'error' && (
+                    <div className="rounded-2xl border px-4 py-3 text-sm border-red-200 bg-red-50 text-red-800">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />
+                        <p className="font-medium">{status.message}</p>
+                      </div>
+                    </div>
+                  )}
 
-                <p className="text-xs text-gray-500 text-center leading-relaxed">
-                  After submitting, you will receive an email with your enrollment details and a secure Razorpay payment link. Once you complete the payment, GrowSnaps will be notified automatically.
-                </p>
-              </form>
+                  <p className="text-xs text-gray-500 text-center leading-relaxed">
+                    After submitting, you will receive an email with your enrollment details and a secure Razorpay payment link.
+                  </p>
+                </form>
+              </div>
+
+              {/* ── Right: Sticky Program Summary Card ── */}
+              <div className="w-full lg:w-80 flex-shrink-0">
+                <div className="sticky top-24">
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className={`rounded-2xl border-2 ${selectedCourse.accent} bg-white shadow-lg overflow-hidden`}
+                  >
+                    {/* Card header */}
+                    <div className="bg-gradient-to-br from-[#74B72E]/10 to-[#74B72E]/5 px-6 pt-6 pb-4 border-b border-gray-100">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Selected Program</p>
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[#74B72E]/15 text-[#74B72E] flex items-center justify-center flex-shrink-0 mt-0.5">
+                          {selectedCourse.icon}
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-gray-900 leading-snug">{selectedCourse.name}</h3>
+                          <p className="text-xs text-gray-500 mt-0.5">{selectedCourse.tagline}</p>
+                        </div>
+                      </div>
+                      {selectedCourse.badge && (
+                        <span className="inline-block mt-3 px-2.5 py-0.5 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wide">
+                          {selectedCourse.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Highlights */}
+                    <div className="px-6 py-4">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">What's included</p>
+                      <ul className="space-y-2">
+                        {selectedCourse.highlights.map((h) => (
+                          <li key={h} className="flex items-start gap-2 text-sm text-gray-600">
+                            <CheckCircle2 className="h-4 w-4 text-[#74B72E] mt-0.5 flex-shrink-0" />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Fee */}
+                    <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">Program Fee</p>
+                        <p className="text-2xl font-extrabold text-[#74B72E]">
+                          ₹{selectedCourse.fee.toLocaleString('en-IN')}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Change plan & Submit */}
+                    <div className="px-6 pb-5 space-y-3">
+                      <button
+                        type="button"
+                        onClick={() => (document.getElementById('enroll-form') as HTMLFormElement | null)?.requestSubmit()}
+                        disabled={isSubmitting}
+                        className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#74B72E] hover:bg-[#659A26] disabled:bg-[#74B72E]/70 text-white font-semibold transition-all shadow-md shadow-[#74B72E]/20 hover:shadow-lg disabled:cursor-not-allowed text-sm"
+                      >
+                        {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Mail className="h-4 w-4" />}
+                        {isSubmitting ? 'Submitting...' : 'Submit & Get Payment Link'}
+                      </button>
+                      <button
+                        onClick={() => { setSelectedCourse(null); setStatus({ type: 'idle', message: '' }); }}
+                        className="w-full text-center text-sm font-semibold text-gray-400 hover:text-[#74B72E] border border-gray-200 hover:border-[#74B72E]/40 rounded-xl py-2.5 transition-all"
+                      >
+                        ← Change Program
+                      </button>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
             </div>
           )}
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
-    </div>
+
+      {/* Success popup modal */}
+      {status.type === 'success' && (
+        <SuccessModal
+          email={status.recipientEmail || formData.email}
+          onClose={() => setStatus({ type: 'idle', message: '' })}
+        />
+      )}
+    </>
   );
 };
 

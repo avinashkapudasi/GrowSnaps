@@ -116,8 +116,7 @@ const SlideContent: React.FC<{ slide: HeroSlide }> = ({ slide }) => (
     )}
 
     {/* Content */}
-    <div className="relative z-10 min-h-screen flex items-center">
-      <div className="w-full px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:py-24 lg:pt-40 lg:pb-32">
+    <div className="relative z-10 min-h-screen flex items-center">        <div className="w-full px-4 sm:px-6 lg:px-8 pt-24 pb-16 md:py-24 lg:pt-36 lg:pb-32">
         <div className="max-w-3xl pl-4 sm:pl-8 lg:pl-16">
           {slide.badge && (
             <motion.div
@@ -331,16 +330,16 @@ const Hero: React.FC<HeroProps> = ({
           <span>{String(carouselSlides.length).padStart(2, '0')}</span>
         </div>
 
-        {/* Scroll prompt - Carousel */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-20 z-30 flex flex-col items-center gap-2">
+        {/* Scroll prompt - Carousel: right side on desktop, below content on mobile */}
+        <div className="absolute z-30 bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 md:top-1/2 md:-translate-y-1/2 md:bottom-auto flex flex-col items-center gap-2">
           <motion.div
-            animate={{ y: [0, -18, 0] }}
+            animate={{ y: [0, -12, 0] }}
             transition={{ duration: 0.7, repeat: Infinity, ease: 'easeOut', repeatType: 'loop' }}
-            className="w-12 h-12 rounded-full bg-[#74B72E] shadow-lg shadow-[#74B72E]/50 flex items-center justify-center"
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#74B72E] shadow-lg shadow-[#74B72E]/50 flex items-center justify-center"
           >
-            <ChevronDown size={24} className="text-white" strokeWidth={3} />
+            <ChevronDown size={22} className="text-white md:rotate-0" strokeWidth={3} />
           </motion.div>
-          <span className="text-white text-xs font-bold tracking-widest uppercase">Scroll down to explore</span>
+          <span className="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase">Scroll</span>
         </div>
       </section>
     );
@@ -356,7 +355,7 @@ const Hero: React.FC<HeroProps> = ({
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/80 to-gray-900/60" />
       )}
 
-      <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10 pt-20 pb-16 md:py-24 lg:pt-40 lg:pb-32">
+      <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10 pt-24 pb-16 md:py-24 lg:pt-36 lg:pb-32">
         {/* Content pinned to the left — no mx-auto so max-w-3xl hugs the left */}
         <div className="max-w-3xl text-left pl-4 sm:pl-8 lg:pl-16">
 
@@ -436,23 +435,23 @@ const Hero: React.FC<HeroProps> = ({
         </div>
       </div>
 
-      {/* Scroll prompt — absolutely centered at the bottom, same as carousel */}
+      {/* Scroll prompt: right side on desktop, below content on mobile */}
       {showScrollPrompt && (
         <motion.div
-          className="absolute left-1/2 -translate-x-1/2 bottom-10 z-20 flex flex-col items-center gap-2"
+          className="absolute z-20 bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 md:top-1/2 md:-translate-y-1/2 md:bottom-auto flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <motion.div
-            animate={{ y: [0, -18, 0] }}
+            animate={{ y: [0, -12, 0] }}
             transition={{ duration: 0.7, repeat: Infinity, ease: 'easeOut', repeatType: 'loop' }}
-            className="w-12 h-12 rounded-full bg-[#74B72E] shadow-lg shadow-[#74B72E]/50 flex items-center justify-center"
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#74B72E] shadow-lg shadow-[#74B72E]/50 flex items-center justify-center"
           >
-            <ChevronDown size={24} className="text-white" strokeWidth={3} />
+            <ChevronDown size={22} className="text-white" strokeWidth={3} />
           </motion.div>
-          <span className="text-white text-xs font-bold tracking-widest uppercase">
-            Scroll down to explore
+          <span className="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase">
+            Scroll
           </span>
         </motion.div>
       )}
