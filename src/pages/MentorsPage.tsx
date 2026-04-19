@@ -19,10 +19,10 @@ interface Mentor {
 
 const mentors: Mentor[] = [
   {
-    name: 'Hari Goutham',
-    role: 'Startup Strategy Mentor',
-    expertise: ['Business Strategy', 'Go-to-Market', 'Fundraising'],
-    bio: 'With 5+ years of experience in startup ecosystems, Hari has mentored over 100 startups from ideation to scale. He specializes in business model innovation and investor readiness.',
+    name: 'Potnuru Hari Gouthamsai',
+    role: 'Managing Director, GrowSnaps Global Ventures Pvt Ltd',
+    expertise: ['Business Strategy', 'Venture Development', 'Strategic Partnerships', 'Market Positioning', 'Startup Execution', 'Growth Strategy', 'Ecosystem Development', 'Product Management'],
+    bio: 'Entrepreneur and Managing Director at GrowSnaps. He leads venture development and ecosystem growth, focusing on transforming ideas into scalable, market-ready businesses with a focus on practical innovation and sustainable growth.',
     image: new URL('../assets/Hari.jpeg', import.meta.url).href,
     program: 'Venture Sprint',
     programColor: '#10B981',
@@ -30,7 +30,7 @@ const mentors: Mentor[] = [
   },
   {
     name: 'Namrata Yantrapragada',
-    role: 'Co-founder & CEO, GrowSnaps Global Ventures',
+    role: 'CEO GrowSnaps Global Ventures',
     expertise: ['Product Strategy', 'Customer Discovery', 'Market Research', 'Startup Building', 'Go-to-Market Strategy', 'Design Thinking'],
     bio: 'Namrata is a dynamic entrepreneur and product strategist focused on building health-centric and impact-driven ventures. She designs experiential entrepreneurship programs enabling students to think critically, validate real-world problems, and build scalable solutions. With a background in pharmacy and expertise in product development and startup execution, she mentors aspiring entrepreneurs in problem discovery, customer validation, and building sustainable, user-centric businesses.',
     image: new URL('../assets/namrata.jpeg', import.meta.url).href,

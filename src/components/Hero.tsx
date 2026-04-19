@@ -34,6 +34,26 @@ interface HeroProps {
 
 const carouselSlides: HeroSlide[] = [
   {
+    title: (
+      <>
+        Young Risers <span className="text-[#74B72E]">Program</span>
+      </>
+    ),
+    subtitle:
+      'A transformative entrepreneurship experience for young minds aged 13–19. Build real ventures, develop leadership skills, and launch your future.',
+    gradient: 'bg-gradient-to-br from-[#1a2e05] via-[#2d4a0e] to-[#1a2e05]',
+    primaryButtonText: 'Apply Now',
+    primaryButtonLink: '/young-risers/enroll',
+    secondaryButtonText: 'Learn More',
+    secondaryButtonLink: '/young-risers',
+    badge: (
+      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#74B72E]/20 text-[#74B72E] text-xs font-semibold uppercase tracking-wider border border-[#74B72E]/30">
+        <Rocket className="h-3.5 w-3.5" /> Youth Program
+      </span>
+    ),
+    variant: 'young-risers',
+  },
+  {
     title: "Building India's NextGen Entrepreneurs",
     subtitle:
       'GrowSnaps Global Ventures is an Entrepreneurial Ecosystem Enabler — empowering students, startups, and institutions to build, launch, and scale impactful ventures.',
@@ -56,26 +76,6 @@ const carouselSlides: HeroSlide[] = [
     secondaryButtonText: 'Explore Our Services',
     secondaryButtonLink: '/services',
     variant: 'default',
-  },
-  {
-    title: (
-      <>
-        Young Risers <span className="text-[#74B72E]">Program</span>
-      </>
-    ),
-    subtitle:
-      'A transformative entrepreneurship experience for young minds aged 13–19. Build real ventures, develop leadership skills, and launch your future.',
-    gradient: 'bg-gradient-to-br from-[#1a2e05] via-[#2d4a0e] to-[#1a2e05]',
-    primaryButtonText: 'Apply Now',
-    primaryButtonLink: '/young-risers/enroll',
-    secondaryButtonText: 'Learn More',
-    secondaryButtonLink: '/young-risers',
-    badge: (
-      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#74B72E]/20 text-[#74B72E] text-xs font-semibold uppercase tracking-wider border border-[#74B72E]/30">
-        <Rocket className="h-3.5 w-3.5" /> Youth Program
-      </span>
-    ),
-    variant: 'young-risers',
   },
 ];
 
@@ -321,13 +321,6 @@ const Hero: React.FC<HeroProps> = ({
               )}
             </button>
           ))}
-        </div>
-
-        {/* Slide counter */}
-        <div className="absolute bottom-8 right-4 md:right-8 z-20 text-white/50 text-sm font-mono">
-          <span className="text-white font-semibold">{String(current + 1).padStart(2, '0')}</span>
-          <span className="mx-1">/</span>
-          <span>{String(carouselSlides.length).padStart(2, '0')}</span>
         </div>
 
         {/* Scroll prompt - Carousel: bottom-right corner on desktop, bottom-center on mobile */}
