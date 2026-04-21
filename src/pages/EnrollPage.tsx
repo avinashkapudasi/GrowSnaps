@@ -46,6 +46,10 @@ const COURSE_OPTIONS: CourseOption[] = [
       'Build functional prototype & business model',
       'Priority access to mentor network',
       'Present to expert jury at Demo Day',
+      'Present a validated startup idea + refined prototype',
+      'Pitch to expert jury with structured feedback',
+      'Prize pool and continued venture guidance for best 3 startup ideas.',
+      'One industrial visit in a span of one year.',
       'Certificate of completion',
     ],
     icon: <Zap className="h-5 w-5" />,
@@ -275,7 +279,7 @@ const EnrollPage: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setSelectedCourse(course)}
-                    className={`relative text-left bg-white rounded-2xl border-2 ${course.accent} p-6 shadow-md hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#74B72E]/40`}
+                    className={`relative text-left bg-white rounded-2xl border-2 ${course.accent} p-6 shadow-md hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#74B72E]/40 flex flex-col items-start h-full`}
                   >
                     {course.badge && (
                       <span className="absolute top-4 right-4 px-2.5 py-0.5 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wide">
@@ -295,7 +299,7 @@ const EnrollPage: React.FC = () => {
                         </li>
                       ))}
                     </ul>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mt-auto w-full">
                       <div>
                         <span className="text-2xl font-extrabold text-[#74B72E]">
                           ₹{course.fee.toLocaleString('en-IN')}

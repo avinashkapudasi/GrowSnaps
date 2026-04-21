@@ -34,43 +34,115 @@ const HomePage: React.FC = () => {
         showScrollPrompt={false}
       />
 
-      {/* About Section */}
+      {/* Vision, Mission & Goals Section */}
       <section className="py-20 bg-gray-50">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-                <span className="text-red-500 font-semibold text-3xl">About GrowSnaps</span>
-              <p className="text-gray-600 mb-6 leading-relaxed mt-4">
-                GrowSnaps Global Ventures is an elite strategy and innovation consulting firm dedicated to architecting the next generation of market-leading ventures by bridging the gap between academic brilliance and commercial excellence.
-              </p>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                We drive impact through a sophisticated, multi-tiered ecosystem: <strong>Young Risers</strong> cultivates a creator mindset in students through a 5-phase experiential journey (Grow → Lead) focused on real-world problem discovery and AI-driven prototyping; <strong>Venture Forge</strong> provides a hands-on, 6-phase framework (Discover → Launch) that transforms raw ideas into structured, market-ready businesses through rigorous validation and iterative product thinking; and <strong>Venture Sprint</strong> offers a high-intensity acceleration path for early-stage startups to eliminate market uncertainty, master unit economics, and achieve definitive product-market fit.
-              </p>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                By integrating end-to-end consulting with structured innovation programs, GrowSnaps transforms campuses into launchpads and startups into scalable enterprises — ensuring every innovation is backed by strategic clarity, operational speed, and long-term sustainability.
-              </p>
-              
-            </motion.div>
+          {/* Vision */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Vision</h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Build a generation of young innovators who think boldly, act early, and create meaningful impact through entrepreneurship.
+            </p>
+          </motion.div>
 
+          {/* Mission */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Mission</h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Enable teens to discover problems, build solutions, and launch real ventures through hands-on learning, mentorship, and structured startup frameworks.
+            </p>
+          </motion.div>
+
+          {/* Goals */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Goals</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { num: '1', title: 'From Ideas to Execution', desc: 'Move students from thinking to building real solutions' },
+                { num: '2', title: 'Entrepreneurial Mindset', desc: 'Develop critical thinking, creativity, and ownership' },
+                { num: '3', title: 'Real-World Projects', desc: 'Work on actual startup ideas and prototypes' },
+                { num: '4', title: 'Future-Ready Skills', desc: 'Build confidence, leadership, and problem-solving ability' },
+              ].map((goal, idx) => (
+                <motion.div
+                  key={goal.num}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex gap-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#74B72E] flex items-center justify-center text-white font-bold">
+                    {goal.num}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-1">{goal.title}</h3>
+                    <p className="text-sm text-gray-600">{goal.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Key Differentiators */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Key Differentiators</h2>
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              {[
+                { title: 'Execution over Theory', desc: 'Students actively build, test, and refine ideas — not just learn concepts' },
+                { title: 'Real Startup Journey', desc: 'From problem discovery to MVP and pitching — a complete founder experience' },
+                { title: 'Structured Frameworks', desc: 'Clear step-by-step process with creative freedom to innovate' },
+                { title: 'Real-World Exposure', desc: 'Learn from founders, mentors, and industry experts through live interactions' },
+              ].map((diff, idx) => (
+                <motion.div
+                  key={diff.title}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-[#74B72E]"
+                >
+                  <h3 className="font-bold text-gray-900 mb-2 text-lg">{diff.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{diff.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Closing Statement */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="rounded-lg overflow-hidden shadow-xl"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              viewport={{ once: true }}
+              className="p-6 bg-[#74B72E]/10 border border-[#74B72E]/30 rounded-lg"
             >
-              <img 
-                src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1600" 
-                alt="Business team meeting" 
-                className="w-full h-auto" 
-              />
+              <p className="text-lg text-gray-900 font-semibold">
+                We don't just teach entrepreneurship — <span className="text-[#74B72E]">we help students become Founders.</span>
+              </p>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
