@@ -31,6 +31,7 @@ const HomePage: React.FC = () => {
         title=""
         subtitle=""
         carousel
+        showScrollPrompt={false}
       />
 
       {/* About Section */}

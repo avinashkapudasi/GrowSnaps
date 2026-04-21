@@ -41,6 +41,7 @@ const carouselSlides: HeroSlide[] = [
     ),
     subtitle:
       'A transformative entrepreneurship experience for young minds aged 13–19. Build real ventures, develop leadership skills, and launch your future.',
+    imageSrc: new URL('../assets/Youngrisers.jpeg', import.meta.url).href,
     gradient: 'bg-gradient-to-br from-[#1a2e05] via-[#2d4a0e] to-[#1a2e05]',
     primaryButtonText: 'Apply Now',
     primaryButtonLink: '/young-risers/enroll',
@@ -99,11 +100,21 @@ const SlideContent: React.FC<{ slide: HeroSlide }> = ({ slide }) => (
     {/* Background */}
     {slide.variant === 'young-risers' ? (
       <div className={`absolute inset-0 ${slide.gradient}`}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#74B72E] rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-20 w-96 h-96 bg-yellow-400 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#74B72E] rounded-full blur-[120px] opacity-5" />
-        </div>
+        {slide.imageSrc ? (
+          <>
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${slide.imageSrc})` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1a2e05]/85 via-[#2d4a0e]/70 to-[#1a2e05]/50" />
+          </>
+        ) : (
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-[#74B72E] rounded-full blur-3xl" />
+            <div className="absolute bottom-10 right-20 w-96 h-96 bg-yellow-400 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#74B72E] rounded-full blur-[120px] opacity-5" />
+          </div>
+        )}
       </div>
     ) : (
       <>
@@ -213,7 +224,7 @@ const Hero: React.FC<HeroProps> = ({
   overlay = true,
   hideServicesButton = false,
   carousel = false,
-  showScrollPrompt = false,
+  showScrollPrompt = true,
   hideButtons = false,
 }) => {
   const [[current, direction], setCurrent] = useState([0, 0]);
@@ -324,7 +335,7 @@ const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* Scroll prompt - Carousel: bottom-right corner on desktop, bottom-center on mobile */}
-        <div className="absolute z-30 bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-8 md:bottom-8 flex flex-col items-center gap-2">
+        {showScrollPrompt && <div className="absolute z-30 bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-8 md:bottom-8 flex flex-col items-center gap-2">
           <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 0.7, repeat: Infinity, ease: 'easeOut', repeatType: 'loop' }}
@@ -333,7 +344,7 @@ const Hero: React.FC<HeroProps> = ({
             <ChevronDown size={22} className="text-white md:rotate-0" strokeWidth={3} />
           </motion.div>
           <span className="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase">Scroll</span>
-        </div>
+        </div>}
       </section>
     );
   }
