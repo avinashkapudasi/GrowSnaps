@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   Rocket, Award, BookOpen, Star, Sparkles, GraduationCap,
-  ChevronRight, Download, ArrowRight, Sprout, Search, Cpu, TrendingUp, Flag,
-  Lightbulb, Layers, Briefcase, MessageSquareQuote, Users, BookMarked, X
+  ChevronRight, ArrowRight, Sprout, Search, Cpu, TrendingUp, Flag,
+  Lightbulb, Layers, Briefcase, MessageSquareQuote, Users
 } from 'lucide-react';
-import brochureFile from '../assets/Website.docx';
+
 
 const sections = [
   { id: 'about', label: 'About' },
@@ -20,7 +20,6 @@ const sections = [
 const YoungRisersPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [brochureOpen, setBrochureOpen] = useState(false);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -90,13 +89,6 @@ const YoungRisersPage: React.FC = () => {
               >
                 <Rocket className="h-4 w-4" /> Apply Now
               </Link>
-              <a
-                href={brochureFile}
-                download="GrowSnaps_Young_Risers_Brochure.docx"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-base transition-all border border-white/20"
-              >
-                <Download className="h-4 w-4" /> Download Brochure
-              </a>
               <a
                 href="#overview"
                 onClick={(e) => { e.preventDefault(); scrollToSection(1); }}
@@ -402,69 +394,11 @@ const YoungRisersPage: React.FC = () => {
             >
               <Rocket className="h-4 w-4" /> Apply Now
             </Link>
-            <a
-              href={brochureFile}
-              download="GrowSnaps_Young_Risers_Brochure.docx"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold transition-all border border-gray-200"
-            >
-              <Download className="h-4 w-4" /> Download Brochure
-            </a>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Floating Brochure Download Widget ── */}
-      <div className="fixed bottom-8 left-6 z-50 flex flex-col items-start gap-3">
-        {/* Subtle slide-up confirmation panel */}
-        <AnimatePresence>
-          {brochureOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: 12, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 12, scale: 0.96 }}
-              transition={{ duration: 0.22, ease: 'easeOut' }}
-              className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 w-64"
-            >
-              <div className="flex items-start justify-between gap-2 mb-3">
-                <div>
-                  <p className="text-sm font-semibold text-gray-900 leading-snug">Young Risers Brochure</p>
-                  <p className="text-xs text-gray-400 mt-0.5">Program overview &amp; details</p>
-                </div>
-                <button
-                  onClick={() => setBrochureOpen(false)}
-                  className="text-gray-300 hover:text-gray-500 transition-colors mt-0.5 flex-shrink-0"
-                  aria-label="Close"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-              <a
-                href={brochureFile}
-                download="GrowSnaps_Young_Risers_Brochure.docx"
-                onClick={() => setBrochureOpen(false)}
-                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-[#74B72E] hover:bg-[#659A26] text-white text-sm font-semibold transition-all shadow-md shadow-[#74B72E]/20"
-              >
-                <Download className="h-4 w-4" /> Download now
-              </a>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Catalogue icon button */}
-        <motion.button
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.94 }}
-          onClick={() => setBrochureOpen((prev) => !prev)}
-          aria-label="Download brochure"
-          className="w-14 h-14 rounded-full bg-[#74B72E] shadow-lg shadow-[#74B72E]/40 hover:shadow-xl hover:shadow-[#74B72E]/50 flex items-center justify-center text-white transition-all duration-300 relative"
-        >
-          <BookMarked className="h-6 w-6" />
-          {/* subtle pulse ring */}
-          {!brochureOpen && (
-            <span className="absolute inset-0 rounded-full border-2 border-[#74B72E] animate-ping opacity-30 pointer-events-none" />
-          )}
-        </motion.button>
-      </div>
+      {/* ── End of Outcomes Section ── */}
     </div>
   );
 };
